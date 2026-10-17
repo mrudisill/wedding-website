@@ -11,24 +11,24 @@
 window.SITE = {
 
   /* ---------- Basics ---------- */
-  siteTitle: "Alex & Jordan 2027",                 // shows in the browser tab
-  couple: { one: "Alex", two: "Jordan", monogram: "A&J" },
-  date: "2027-06-18T16:00",                       // used for the countdown (YYYY-MM-DDTHH:MM)
-  dateText: "June 18, 2027",
-  location: "Seaside Town, State",
+  siteTitle: "Nicole & Douglas",                 // shows in the browser tab
+  couple: { one: "Nicole", two: "Douglas", monogram: "W" },
+  date: "2027-10-02T16:00",                       // used for the countdown (YYYY-MM-DDTHH:MM)
+  dateText: "10.02.2027",
+  location: "Bethlehem, Pennsylvania",
 
   /* ---------- Colors ----------
      Change these hex codes when you pick your colors.
      Some ready-made sets are at the bottom of this file. */
   colors: {
-    primary:     "#5f6f52",   // headings, buttons
-    primaryDark: "#3e4a35",   // menu + RSVP background
-    accent:      "#d9958f",   // wax seal, hearts, highlights
-    background:  "#fbf8f2",   // page background
-    card:        "#fffdf9",   // cards / paper
-    tint:        "#e4ead8",   // pattern color 1
-    tint2:       "#f5e1dc",   // pattern color 2
-    text:        "#2e2d29"    // body text
+    primary:     "#3b6a47",   // the invitation's green ink: headings, buttons, wax seal
+    primaryDark: "#2a4d34",   // menu background
+    accent:      "#7d9b84",   // soft sage: falling leaves, hearts, dashed stamps
+    background:  "#f4f6f3",   // off-white, like the save-the-date card
+    card:        "#fbfcfa",   // cards / paper
+    tint:        "#dfe5ea",   // pale blue-gray, like the room card + envelope
+    tint2:       "#e9eee8",   // pale sage
+    text:        "#2d3a31"    // body text
   },
 
   /* ---------- Envelope intro + password ----------
@@ -39,8 +39,9 @@ window.SITE = {
 
   /* ---------- Top of page ---------- */
   hero: {
-    kicker: "We're getting married",
-    photo: ""                                      // e.g. "photos/hero.jpg"
+    kicker: "Save our date",                       // shows as: SAVE OUR DATE — BETHLEHEM, PENNSYLVANIA
+    tagline: "Formal invitation to follow",        // the script line under it
+    photo: ""                                      // optional, e.g. "photos/hero.jpg"
   },
 
   /* ---------- Welcome note ---------- */
@@ -51,7 +52,7 @@ window.SITE = {
       "We are so excited to celebrate with you. Everything you need for the weekend is on this page — the schedule, where to stay, how to get here and a few of our favorite spots.",
       "If you have any questions that aren't answered here, please reach out any time."
     ],
-    signature: "Alex & Jordan",
+    signature: "Nicole & Douglas",
     photos: [
       { src: "", caption: "Where it began" },
       { src: "", caption: "The proposal" },
@@ -66,19 +67,19 @@ window.SITE = {
     title: "The Weekend",
     intro: "Here's what we have planned. Tap any event to add it to your calendar.",
     events: [
-      { name: "Welcome Drinks", icon: "drinks", date: "2027-06-17", start: "20:00", end: "22:00",
-        venue: "Venue Name", address: "123 Main Street, Seaside Town, ST", attire: "Summer cocktail",
+      { name: "Welcome Drinks", icon: "drinks", date: "2027-10-01", start: "20:00", end: "22:00",
+        venue: "Venue Name", address: "123 Main Street, Bethlehem, PA", attire: "Summer cocktail",
         note: "Kick off the weekend with us!" },
-      { name: "Ceremony", icon: "rings", date: "2027-06-18", start: "16:00", end: "17:00",
-        venue: "Ceremony Venue", address: "456 Chapel Road, Seaside Town, ST", attire: "Black-tie optional",
+      { name: "Ceremony", icon: "rings", date: "2027-10-02", start: "16:00", end: "17:00",
+        venue: "Ceremony Venue", address: "456 Chapel Road, Bethlehem, PA", attire: "Black-tie optional",
         note: "Please arrive 15–30 minutes early." },
-      { name: "Reception", icon: "dinner", date: "2027-06-18", start: "17:30", end: "22:00",
-        venue: "Reception Venue", address: "789 Vineyard Lane, Seaside Town, ST", attire: "",
+      { name: "Reception", icon: "dinner", date: "2027-10-02", start: "17:30", end: "22:00",
+        venue: "Reception Venue", address: "789 Vineyard Lane, Bethlehem, PA", attire: "",
         note: "Shuttles will run to and from the reception." },
-      { name: "After Party", icon: "party", date: "2027-06-18", start: "22:30", end: "02:00",
-        venue: "Local Bar", address: "12 Beach Avenue, Seaside Town, ST", attire: "", note: "" },
-      { name: "Farewell Brunch", icon: "coffee", date: "2027-06-19", allDay: false, start: "10:00", end: "12:00",
-        venue: "Brunch Spot", address: "34 Ocean Drive, Seaside Town, ST", attire: "Casual",
+      { name: "After Party", icon: "party", date: "2027-10-02", start: "22:30", end: "02:00",
+        venue: "Local Bar", address: "12 Beach Avenue, Bethlehem, PA", attire: "", note: "" },
+      { name: "Farewell Brunch", icon: "coffee", date: "2027-10-03", allDay: false, start: "10:00", end: "12:00",
+        venue: "Brunch Spot", address: "34 Ocean Drive, Bethlehem, PA", attire: "Casual",
         note: "Say goodbye before you head home." }
     ]
   },
@@ -86,11 +87,11 @@ window.SITE = {
   /* ---------- Where to stay ----------  price: 1, 2 or 3 ($ to $$$) */
   stay: {
     title: "Where to Stay",
-    intro: "We've reserved room blocks at a few hotels. Tap a card for the booking code.",
+    intro: "You're invited to stay with us at Saucon Valley Country Club.",
+    script: "We're holding a room just for you.",
     hotels: [
-      { name: "Hotel One",   tag: "Beachfront", price: 3, link: "https://example.com", codeLabel: "Group code", code: "WEDDING27", note: "Two-night minimum." },
-      { name: "Hotel Two",   tag: "Walk to town", price: 2, link: "https://example.com", codeLabel: "Group code", code: "AJ2027",    note: "" },
-      { name: "Hotel Three", tag: "Budget friendly", price: 1, link: "https://example.com", codeLabel: "Promo code", code: "LOVE",   note: "Call the front desk to book." }
+      { name: "Saucon Valley Country Club", tag: "Our room block", price: 0, link: "", codeLabel: "Booking code", code: "",
+        note: "Add how guests confirm their reservation here." }
     ]
   },
 
@@ -99,9 +100,8 @@ window.SITE = {
     title: "Getting Here",
     intro: "How to get to town — and how to get around once you're here.",
     gettingHere: [
-      { icon: "car",   title: "By car",   text: "About 2 hours from the nearest big city." },
-      { icon: "plane", title: "By air",   text: "Closest airport: ABC (45 min). A rental car is recommended." },
-      { icon: "boat",  title: "By ferry", text: "The ferry runs daily — walk-on or drive-on." }
+      { icon: "car",   title: "By car",   text: "Add driving directions here." },
+      { icon: "plane", title: "By air",   text: "Add the closest airports here." }
     ],
     gettingAround: [
       { icon: "bus",  title: "Wedding shuttle", text: "We'll run a shuttle to and from the reception. Schedule coming soon!" },
@@ -150,7 +150,7 @@ window.SITE = {
   rsvp: {
     title: "Will you be there?",
     text: "Please let us know by",
-    deadline: "May 1, 2027",
+    deadline: "",                                 // e.g. "September 1, 2027"
     link: "",                                     // e.g. "https://forms.gle/..."
     button: "RSVP"
   },

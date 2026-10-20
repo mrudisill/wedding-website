@@ -136,7 +136,8 @@ $("#heroScript").textContent = H.tagline || "";
 if (H.photo) { $("#heroPhoto").hidden = false; $("#heroPhoto").style.backgroundImage = `url("${H.photo}")`; }
 
 /* ---------- Welcome ---------- */
-const W = S.welcome;
+const shown = sec => sec && sec.show !== false;
+const W = shown(S.welcome) && S.welcome;
 if (W) {
   const photos = (W.photos || []).slice(0, 5);
   const n = photos.length;
@@ -292,7 +293,7 @@ if (T && ((T.gettingHere || []).length || (T.gettingAround || []).length)) {
 } else $("#travel").remove();
 
 /* ---------- Things to do ---------- */
-const places = S.todo?.places || [];
+const places = shown(S.todo) ? S.todo.places || [] : [];
 if (places.length) {
   const catIcon = { coffee: "coffee", eat: "dinner", food: "dinner", drinks: "drinks", bar: "drinks", do: "sun", see: "star", shop: "heart" };
   const cats = [...new Set(places.map(p => p.category).filter(Boolean))];
@@ -319,7 +320,7 @@ if (places.length) {
 } else $("#todo").remove();
 
 /* ---------- Attire ---------- */
-const looks = S.attire?.looks || [];
+const looks = shown(S.attire) ? S.attire.looks || [] : [];
 if (looks.length) {
   $("#attire").innerHTML = `<div class="paper">${head(S.attire.title, S.attire.intro)}
     <div class="looks">${looks.map((l, i) => `<div class="look" data-reveal style="--d:${i * 120}ms">
@@ -329,7 +330,7 @@ if (looks.length) {
 } else $("#attire").remove();
 
 /* ---------- FAQ ---------- */
-const faqs = S.faq?.items || [];
+const faqs = shown(S.faq) ? S.faq.items || [] : [];
 if (faqs.length) {
   $("#faq").innerHTML = `<div class="paper">${head(S.faq.title, S.faq.intro)}
     <div>${faqs.map((f, i) => `<div class="faq-item" data-reveal style="--d:${Math.min(i, 6) * 60}ms">
@@ -344,7 +345,7 @@ if (faqs.length) {
 } else $("#faq").remove();
 
 /* ---------- RSVP ---------- */
-const R = S.rsvp;
+const R = shown(S.rsvp) && S.rsvp;
 if (R) {
   $("#rsvp").innerHTML = `<div class="sec-head" data-reveal style="margin:0">
       <p class="label">RSVP</p><h2 class="title">${esc(R.title)}</h2>${SQUIG}
@@ -354,6 +355,11 @@ if (R) {
     </div>`;
   $("#rsvpBtn").addEventListener("click", e => burst(e.clientX, e.clientY, 18));
 } else $("#rsvp").remove();
+
+/* ---------- Keep backgrounds alternating and the scroll arrow pointing at the first section ---------- */
+const secs = $$("main > .sec:not(.rsvp)");
+secs.forEach((el, i) => { el.classList.remove("tone-blue", "tone-ivory"); el.classList.add(i % 2 ? "tone-ivory" : "tone-blue"); });
+if (secs[0]) $(".scroll-cue").setAttribute("href", "#" + secs[0].id);
 
 /* ---------- Nav + menu ---------- */
 const NAV = [["welcome", "Welcome"], ["schedule", "Schedule"], ["stay", "Stay"], ["travel", "Travel"], ["todo", "To-Do"], ["attire", "Attire"], ["faq", "FAQ"], ["rsvp", "RSVP"]]

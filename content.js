@@ -53,6 +53,7 @@ window.SITE = {
 
   /* ---------- Welcome note ---------- */
   welcome: {
+    show: false,                                   // hidden until the real wording is in — change to true to show
     kicker: "A note from us",
     title: "Welcome!",
     paragraphs: [
@@ -74,8 +75,8 @@ window.SITE = {
      description: optional line under the event name
      icon: drinks, rings, dinner, party, sun, coffee, heart */
   schedule: {
-    title: "The Weekend",
-    intro: "Here's what we have planned. Tap any event to add it to your calendar.",
+    title: "Schedule",
+    intro: "",
     events: [
       { name: "Welcome Drinks", icon: "drinks", date: "2027-10-01", time: "TBD",
         venue: "Saucon Valley Country Club | Weyhill Guest House", address: "5450 Weyhill Farm Rd, Bethlehem, PA 18015",
@@ -97,8 +98,7 @@ window.SITE = {
     intro: "You're invited to stay with us at Saucon Valley Country Club.",
     script: "We're holding a room just for you.",
     hotels: [
-      { name: "Saucon Valley Country Club", tag: "Our room block", price: 0, link: "", codeLabel: "Booking code", code: "",
-        note: "Add how guests confirm their reservation here." },
+      { name: "Saucon Valley Country Club", tag: "", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" },
       { name: "Hotel Bethlehem", tag: "Less than 15 minutes from SVCC", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" },
       { name: "Homewood Suites by Hilton Allentown Bethlehem Center Valley", tag: "Less than 5 minutes from SVCC", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" },
       { name: "SpringHill Suites by Marriott Allentown Bethlehem/Center Valley", tag: "Less than 5 minutes from SVCC", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" },
@@ -116,7 +116,7 @@ window.SITE = {
     title: "You're invited to stay with us",
     venue: "at Saucon Valley Country Club",
     script: "We're holding a room just for you.",
-    intro: "Please let us know whether you'd like the room we're holding for you.",
+    intro: "",
     deadline: "",                                  // e.g. "August 1, 2027"
     nights: ["Friday, October 1", "Saturday, October 2"],
     yesText: "Yes, please hold my room",
@@ -143,6 +143,7 @@ window.SITE = {
 
   /* ---------- Things to do ----------  category becomes a filter button */
   todo: {
+    show: false,                                   // hidden until the real wording is in — change to true to show
     title: "Things to Do",
     intro: "A few of our favorite spots. Reservations recommended for dinners.",
     places: [
@@ -156,6 +157,7 @@ window.SITE = {
 
   /* ---------- Dress code ----------  palette: optional color swatches */
   attire: {
+    show: false,                                   // hidden until the real wording is in — change to true to show
     title: "What to Wear",
     intro: "",
     looks: [
@@ -170,6 +172,7 @@ window.SITE = {
 
   /* ---------- FAQ ---------- */
   faq: {
+    show: false,                                   // hidden until the real wording is in — change to true to show
     title: "Questions",
     items: [
       { q: "Can I bring a plus-one?", a: "We're only able to accommodate guests named on your invitation." },
@@ -180,6 +183,7 @@ window.SITE = {
 
   /* ---------- RSVP ----------  link: your Google Form / Zola / The Knot RSVP link */
   rsvp: {
+    show: false,                                   // hidden until the real wording is in — change to true to show
     title: "Will you be there?",
     text: "Please let us know by",
     deadline: "",                                 // e.g. "September 1, 2027"
@@ -187,7 +191,7 @@ window.SITE = {
     button: "RSVP"
   },
 
-  footer: "Made with love"
+  footer: ""
 };
 
 /* ---------- Color sets to try (copy one into "colors" above) ----------

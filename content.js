@@ -92,17 +92,26 @@ window.SITE = {
     ]
   },
 
-  /* ---------- Where to stay ----------  price: 1, 2 or 3 ($ to $$$) */
+  /* ---------- Where to stay ----------
+     link: the hotel's website (the whole card opens it). price: 1, 2 or 3 ($ to $$$), 0 = hide.
+     code/note: optional booking code and a short note shown on the card. */
   stay: {
     title: "Where to Stay",
     intro: "You're invited to stay with us at Saucon Valley Country Club.",
     script: "We're holding a room just for you.",
     hotels: [
-      { name: "Saucon Valley Country Club", tag: "", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" },
-      { name: "Hotel Bethlehem", tag: "Less than 15 minutes from SVCC", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" },
-      { name: "Homewood Suites by Hilton Allentown Bethlehem Center Valley", tag: "Less than 5 minutes from SVCC", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" },
-      { name: "SpringHill Suites by Marriott Allentown Bethlehem/Center Valley", tag: "Less than 5 minutes from SVCC", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" },
-      { name: "Wind Creek Bethlehem", tag: "Less than 15 minutes from SVCC", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" }
+      { name: "Saucon Valley Country Club", tag: "", address: "2050 Saucon Valley Rd, Bethlehem, PA 18015",
+        link: "https://www.sauconvalleycc.org/", price: 0, codeLabel: "Booking code", code: "", note: "" },
+      { name: "Hotel Bethlehem", tag: "Less than 15 minutes from SVCC", address: "437 Main Street, Bethlehem, PA 18018",
+        link: "https://www.hotelbethlehem.com/", price: 0, codeLabel: "Booking code", code: "", note: "" },
+      { name: "Homewood Suites by Hilton Allentown Bethlehem Center Valley", tag: "Less than 5 minutes from SVCC",
+        address: "3350 Center Valley Parkway, Center Valley, PA 18034",
+        link: "https://www.hilton.com/en/hotels/abecvhw-homewood-suites-allentown-bethlehem-center-valley/", price: 0, codeLabel: "Booking code", code: "", note: "" },
+      { name: "SpringHill Suites by Marriott Allentown Bethlehem/Center Valley", tag: "Less than 5 minutes from SVCC",
+        address: "3800 West Drive, Center Valley, PA 18034",
+        link: "https://www.marriott.com/en-us/hotels/abecv-springhill-suites-allentown-bethlehem-center-valley/overview/", price: 0, codeLabel: "Booking code", code: "", note: "" },
+      { name: "Wind Creek Bethlehem", tag: "Less than 15 minutes from SVCC", address: "77 Wind Creek Blvd, Bethlehem, PA 18015",
+        link: "https://windcreek.com/bethlehem", price: 0, codeLabel: "Booking code", code: "", note: "" }
     ]
   },
 

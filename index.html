@@ -224,56 +224,50 @@ document.addEventListener("click", e => {
   burst(e.clientX, e.clientY, 8);
 });
 
-/* ---------- Hotels ---------- */
+/* ---------- Hotels: hotel key tags ---------- */
 const hotels = S.stay?.hotels || [];
 if (hotels.length) {
   $("#stay").innerHTML = `<div class="paper">${head(S.stay.title, S.stay.intro)}
     ${S.stay.script ? `<p class="lead-script" style="text-align:center;margin:-18px 0 34px" data-reveal>${esc(S.stay.script)}</p>` : ""}
     ${hotels.filter(h => h.price).length > 1 ? `<div class="toolbar" data-reveal><button class="chip" id="sortBtn" aria-pressed="false">Sort by price ↑</button></div>` : ""}
-    <div class="grid" id="hotelGrid">${hotels.map((h, i) => {
+    <div class="keytags" id="hotelGrid">${hotels.map((h, i) => {
       const p = Math.max(1, Math.min(3, +h.price || 0));
-      const hasBack = h.code || h.note || h.link;
-      return `<div class="flip${hasBack ? "" : " static"}" data-reveal style="--d:${i * 90}ms" data-i="${i}" data-price="${h.price ? p : 0}"><div class="flip-in">
-        <div class="face front">
-          ${h.tag ? `<p class="label">${esc(h.tag)}</p>` : ""}
-          <h3>${esc(h.name)}</h3>
-          ${h.price ? `<div class="price">${"$".repeat(p)}<i>${"$".repeat(3 - p)}</i></div>` : ""}
-          <div class="spacer"></div>
-          ${hasBack ? `<button class="flip-btn" type="button">${icon("flip")} Booking details</button>` : ""}
+      return `<article class="keytag" data-reveal style="--d:${i * 90}ms;--tilt:${[-2.5, 2, -1.5, 2.5, -2][i % 5]}deg" data-i="${i}" data-price="${h.price ? p : 0}">
+        <span class="keytag-ring" aria-hidden="true"></span>
+        <p class="keytag-no">No. ${pad(i + 1)}</p>
+        <h3>${h.link ? `<a class="keytag-link" href="${esc(h.link)}" target="_blank" rel="noopener">${esc(h.name)}</a>` : esc(h.name)}</h3>
+        ${h.tag ? `<p class="keytag-pill">${icon("car")}${esc(h.tag)}</p>` : ""}
+        ${h.address ? `<p class="keytag-addr">${esc(h.address)}</p>` : ""}
+        ${h.price ? `<div class="price">${"$".repeat(p)}<i>${"$".repeat(3 - p)}</i></div>` : ""}
+        ${h.code ? `<div class="keytag-code"><span class="label">${esc(h.codeLabel || "Code")}</span>
+          <span class="code">${esc(h.code)}</span><button class="copy" type="button" data-code="${esc(h.code)}">Copy</button></div>` : ""}
+        ${h.note ? `<p class="keytag-note">${esc(h.note)}</p>` : ""}
+        <div class="keytag-actions">
+          ${h.link ? `<span class="keytag-cta">Visit website ${icon("arrow")}</span>` : ""}
+          ${h.address ? `<a class="keytag-map" href="${mapUrl(h.address)}" target="_blank" rel="noopener">${icon("pin")} Directions</a>` : ""}
         </div>
-        <div class="face back">
-          ${h.code ? `<p class="label">${esc(h.codeLabel || "Code")}</p>
-          <div class="code-row"><span class="code">${esc(h.code)}</span><button class="copy" type="button" data-code="${esc(h.code)}">Copy</button></div>` : ""}
-          ${h.note ? `<p class="small">${esc(h.note)}</p>` : ""}
-          <div class="spacer"></div>
-          ${h.link ? `<a class="btn" href="${esc(h.link)}" target="_blank" rel="noopener">Book ${icon("arrow")}</a>` : ""}
-          <button class="flip-btn" type="button">${icon("flip")} Flip back</button>
-        </div></div></div>`;
+      </article>`;
     }).join("")}</div></div>`;
   const grid = $("#hotelGrid");
   grid.addEventListener("click", e => {
     const copy = e.target.closest(".copy");
-    if (copy) {
-      const done = () => { copy.textContent = "Copied ♥"; setTimeout(() => copy.textContent = "Copy", 1600); };
-      navigator.clipboard?.writeText(copy.dataset.code).then(done, done) ?? done();
-      burst(e.clientX, e.clientY, 8);
-      return;
-    }
-    if (e.target.closest("a")) return;
-    e.target.closest(".flip:not(.static)")?.classList.toggle("on");
+    if (!copy) return;
+    const done = () => { copy.textContent = "Copied ♥"; setTimeout(() => copy.textContent = "Copy", 1600); };
+    navigator.clipboard?.writeText(copy.dataset.code).then(done, done) ?? done();
+    burst(e.clientX, e.clientY, 8);
   });
   let sortMode = 0; // 0 original, 1 low→high, 2 high→low
   $("#sortBtn")?.addEventListener("click", ev => {
     sortMode = (sortMode + 1) % 3;
     ev.currentTarget.textContent = ["Sort by price ↑", "Price: low to high", "Price: high to low"][sortMode];
     ev.currentTarget.setAttribute("aria-pressed", sortMode ? "true" : "false");
-    const cards = $$(".flip", grid);
+    const cards = $$(".keytag", grid);
     const first = new Map(cards.map(c => [c, c.getBoundingClientRect()]));
     cards.sort((a, b) => sortMode === 0 ? a.dataset.i - b.dataset.i : sortMode === 1 ? a.dataset.price - b.dataset.price : b.dataset.price - a.dataset.price)
       .forEach(c => grid.append(c));
     if (!reduce) cards.forEach(c => { // slide cards to their new spots
       const a = first.get(c), b = c.getBoundingClientRect();
-      c.animate([{ transform: `translate(${a.left - b.left}px,${a.top - b.top}px)` }, { transform: "none" }], { duration: 550, easing: "cubic-bezier(.3,.8,.3,1)" });
+      c.animate([{ translate: `${a.left - b.left}px ${a.top - b.top}px` }, { translate: "0 0" }], { duration: 550, easing: "cubic-bezier(.3,.8,.3,1)" });
     });
   });
 } else $("#stay").remove();

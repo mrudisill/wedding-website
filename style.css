@@ -213,6 +213,46 @@ body.ready .rise{animation:rise 1s var(--d,0s) cubic-bezier(.2,.7,.2,1) forwards
 .face.back .btn{border-color:var(--paper);color:var(--paper);align-self:flex-start}
 .face.back .btn:hover{background:var(--paper);color:var(--primary)}
 
+/* Hotel key tags */
+.keytags{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:44px 20px;padding-top:30px}
+.keytag{position:relative;flex:0 1 246px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;
+  padding:54px 18px 26px;background:var(--paper);border:1px solid var(--line);border-radius:90px 90px 12px 12px / 64px 64px 12px 12px;
+  box-shadow:0 1px 2px rgb(0 0 0/.05),0 16px 30px -18px rgb(30 50 35/.45);
+  transform-origin:50% 26px;
+  transition:opacity .9s ease,transform .7s cubic-bezier(.3,1.9,.45,1),box-shadow .35s ease;transition-delay:var(--d,0s)}
+.keytag::before{content:"";position:absolute;inset:7px;border:1px dashed color-mix(in srgb,var(--primary) 32%,transparent);border-radius:84px 84px 8px 8px / 58px 58px 8px 8px;pointer-events:none}
+.keytag[data-reveal]{transform:translateY(26px) rotate(var(--tilt,0deg))}
+.keytag[data-reveal].in{transform:rotate(var(--tilt,0deg))}
+.keytag[data-reveal].in:hover,.keytag[data-reveal].in:focus-within{transform:translateY(-6px) rotate(0deg);transition-delay:0s;
+  box-shadow:0 1px 2px rgb(0 0 0/.05),0 26px 40px -20px rgb(30 50 35/.5)}
+.keytag-ring{position:absolute;top:18px;left:50%;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:var(--tint1);
+  border:3px solid color-mix(in srgb,var(--accent) 75%,var(--paper));box-shadow:inset 0 1px 3px rgb(0 0 0/.25)}
+.keytag-ring::after{content:"";position:absolute;left:50%;bottom:6px;width:34px;height:46px;margin-left:-17px;
+  border:1.5px solid color-mix(in srgb,var(--primary) 55%,transparent);border-bottom:0;border-radius:50% 50% 0 0}
+.keytag-no{margin:0;font:500 .62rem/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--accent)}
+.keytag h3{margin:0;font:500 1.25rem/1.15 var(--serif);text-transform:uppercase;letter-spacing:.02em;color:var(--primary)}
+.keytag-link{color:inherit;text-decoration:none}
+.keytag-link::after{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit}
+.keytag-link:focus-visible{outline:none}
+.keytag:has(.keytag-link:focus-visible){outline:2px solid var(--accent);outline-offset:4px}
+.keytag-pill{display:inline-flex;align-items:center;gap:7px;margin:2px 0 0;padding:.55em 1em;border-radius:999px;background:var(--tint1);color:var(--primary);
+  font:500 .62rem/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.keytag-pill .icon{width:15px;height:15px;transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.keytag:hover .keytag-pill .icon{transform:translateX(3px)}
+.keytag-addr{margin:0;color:var(--muted);font-size:.98rem;line-height:1.4}
+.keytag-code{position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 10px}
+.keytag-code .label{width:100%}
+.keytag .copy{border-color:var(--line);color:var(--primary);background:var(--paper)}
+.keytag-note{margin:0;font-size:.92rem;color:var(--muted)}
+.keytag-actions{margin-top:auto;padding-top:12px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 18px}
+.keytag-cta{display:inline-flex;align-items:center;gap:6px;font:500 .64rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--primary)}
+.keytag-cta .icon{width:14px;height:14px;transition:transform .35s ease}
+.keytag:hover .keytag-cta .icon{transform:translateX(5px)}
+.keytag-map{position:relative;z-index:2;display:inline-flex;align-items:center;gap:4px;font:400 .8rem/1 var(--sans);color:var(--muted);text-decoration:none;
+  padding-bottom:3px;border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
+.keytag-map:hover{color:var(--primary);border-color:var(--primary)}
+.keytag-map .icon{width:14px;height:14px}
+
 /* ---------- Travel ---------- */
 .tiles{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
 .tile{display:flex;gap:16px;align-items:flex-start;padding:20px;border-radius:var(--radius);background:color-mix(in srgb,var(--tint1) 35%,var(--paper));border:1px solid var(--line)}

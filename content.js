@@ -98,7 +98,11 @@ window.SITE = {
     script: "We're holding a room just for you.",
     hotels: [
       { name: "Saucon Valley Country Club", tag: "Our room block", price: 0, link: "", codeLabel: "Booking code", code: "",
-        note: "Add how guests confirm their reservation here." }
+        note: "Add how guests confirm their reservation here." },
+      { name: "Hotel Bethlehem", tag: "Less than 15 minutes from SVCC", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" },
+      { name: "Homewood Suites by Hilton Allentown Bethlehem Center Valley", tag: "Less than 5 minutes from SVCC", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" },
+      { name: "SpringHill Suites by Marriott Allentown Bethlehem/Center Valley", tag: "Less than 5 minutes from SVCC", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" },
+      { name: "Wind Creek Bethlehem", tag: "Less than 15 minutes from SVCC", price: 0, link: "", codeLabel: "Booking code", code: "", note: "" }
     ]
   },
 

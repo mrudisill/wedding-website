@@ -192,6 +192,9 @@ body.ready .rise{animation:rise 1s var(--d,0s) cubic-bezier(.2,.7,.2,1) forwards
 .flip.on .flip-in{transform:rotateY(180deg)}
 .face{grid-area:1/1;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:var(--radius);padding:24px;border:1px solid var(--line);background:var(--paper);display:flex;flex-direction:column;gap:8px;cursor:pointer}
 .face.front:hover{border-color:var(--primary)}
+.flip.static .flip-in{min-height:170px}
+.flip.static .face{cursor:default}
+.flip.static .face.front:hover{border-color:var(--line)}
 .face h3{font:500 1.55rem/1.1 var(--serif);text-transform:uppercase;letter-spacing:.02em;color:var(--primary);margin:0}
 .price{font:500 1.05rem var(--serif);letter-spacing:.08em;color:var(--primary)}
 .price i{font-style:normal;opacity:.25}

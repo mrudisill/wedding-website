@@ -227,16 +227,17 @@ const hotels = S.stay?.hotels || [];
 if (hotels.length) {
   $("#stay").innerHTML = `<div class="paper">${head(S.stay.title, S.stay.intro)}
     ${S.stay.script ? `<p class="lead-script" style="text-align:center;margin:-18px 0 34px" data-reveal>${esc(S.stay.script)}</p>` : ""}
-    ${hotels.length > 1 ? `<div class="toolbar" data-reveal><button class="chip" id="sortBtn" aria-pressed="false">Sort by price ↑</button></div>` : ""}
+    ${hotels.filter(h => h.price).length > 1 ? `<div class="toolbar" data-reveal><button class="chip" id="sortBtn" aria-pressed="false">Sort by price ↑</button></div>` : ""}
     <div class="grid" id="hotelGrid">${hotels.map((h, i) => {
       const p = Math.max(1, Math.min(3, +h.price || 0));
-      return `<div class="flip" data-reveal style="--d:${i * 90}ms" data-i="${i}" data-price="${h.price ? p : 0}"><div class="flip-in">
+      const hasBack = h.code || h.note || h.link;
+      return `<div class="flip${hasBack ? "" : " static"}" data-reveal style="--d:${i * 90}ms" data-i="${i}" data-price="${h.price ? p : 0}"><div class="flip-in">
         <div class="face front">
           ${h.tag ? `<p class="label">${esc(h.tag)}</p>` : ""}
           <h3>${esc(h.name)}</h3>
           ${h.price ? `<div class="price">${"$".repeat(p)}<i>${"$".repeat(3 - p)}</i></div>` : ""}
           <div class="spacer"></div>
-          <button class="flip-btn" type="button">${icon("flip")} Booking details</button>
+          ${hasBack ? `<button class="flip-btn" type="button">${icon("flip")} Booking details</button>` : ""}
         </div>
         <div class="face back">
           ${h.code ? `<p class="label">${esc(h.codeLabel || "Code")}</p>
@@ -257,7 +258,7 @@ if (hotels.length) {
       return;
     }
     if (e.target.closest("a")) return;
-    e.target.closest(".flip")?.classList.toggle("on");
+    e.target.closest(".flip:not(.static)")?.classList.toggle("on");
   });
   let sortMode = 0; // 0 original, 1 low→high, 2 high→low
   $("#sortBtn")?.addEventListener("click", ev => {

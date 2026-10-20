@@ -363,6 +363,7 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const FX = { leaves: false, hearts: false, ...(S.effects || {}) };
 const mapUrl = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
 const store = { get(k) { try { return sessionStorage.getItem(k); } catch { return null; } },
                 set(k, v) { try { sessionStorage.setItem(k, v); } catch {} } };
@@ -707,7 +708,7 @@ else {
 /* ---------- Falling petals ---------- */
 function petals() {
   const cv = $("#petals");
-  if (reduce || !cv.getContext) return;
+  if (reduce || !cv.getContext || !FX.leaves) return;
   const ctx = cv.getContext("2d");
   const cs = getComputedStyle(document.documentElement);
   const colors = [cs.getPropertyValue("--accent"), cs.getPropertyValue("--tint1"), cs.getPropertyValue("--primary")].map(c => c.trim());
@@ -743,7 +744,7 @@ function petals() {
 
 /* ---------- Heart burst ---------- */
 function burst(x, y, n = 14) {
-  if (reduce || !x) return;
+  if (reduce || !x || !FX.hearts) return;
   for (let i = 0; i < n; i++) {
     const s = document.createElement("span");
     s.className = "heart"; s.textContent = "♥";

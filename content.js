@@ -37,6 +37,13 @@ window.SITE = {
   intro: true,
   password: "",
 
+  /* ---------- Extra animations ----------
+     true = on, false = off */
+  effects: {
+    leaves: false,   // little leaves/petals drifting down the top of the page
+    hearts: false    // tiny hearts that burst out when buttons are tapped
+  },
+
   /* ---------- Top of page ---------- */
   hero: {
     kicker: "Save our date",                       // shows as: SAVE OUR DATE — BETHLEHEM, PENNSYLVANIA

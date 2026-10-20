@@ -71,6 +71,7 @@ window.SITE = {
      date: "YYYY-MM-DD"
      time: text to show, e.g. "TBD" or "6:00 PM". For calendar invites with exact times,
            add start/end in 24-hour "HH:MM" (e.g. start: "18:00", end: "21:00").
+     description: optional line under the event name
      icon: drinks, rings, dinner, party, sun, coffee, heart */
   schedule: {
     title: "The Weekend",
@@ -80,10 +81,11 @@ window.SITE = {
         venue: "Saucon Valley Country Club | Weyhill Guest House", address: "5450 Weyhill Farm Rd, Bethlehem, PA 18015",
         attire: "Cocktail", note: "" },
       { name: "Ceremony & Reception", icon: "rings", date: "2027-10-02", time: "TBD",
-        venue: "Saucon Valley Country Club", address: "2050 Saucon Valley Rd, Bethlehem, PA 18015",
+        description: "Our ceremony, cocktails, dinner, and dancing will be held at Saucon Valley Country Club",
+        venue: "", address: "2050 Saucon Valley Rd, Bethlehem, PA 18015",
         attire: "Black Tie",
-        note: "Our ceremony, cocktails, dinner, and dancing will be held at Saucon Valley Country Club. We kindly ask that you are seated 15–20 minutes prior." },
-      { name: "After Party", icon: "party", date: "2027-10-02", time: "TBD",
+        note: "We kindly ask that you are seated 15-20 minutes prior" },
+      { name: "After Party", icon: "party", date: "", time: "TBD",
         venue: "Saucon Valley Country Club | Weyhill Guest House", address: "5450 Weyhill Farm Rd, Bethlehem, PA 18015",
         attire: "", note: "" }
     ]
@@ -135,10 +137,8 @@ window.SITE = {
     ],
     hereNote: "We recommend renting a car or arranging transportation in advance.",
     aroundLabel: "Getting around",
-    gettingAround: [
-      { icon: "car", title: "Uber & Lyft", text: "Uber and Lyft are also available in the area, although we recommend arranging transportation in advance when possible." }
-    ],
-    aroundNote: ""
+    gettingAround: [],
+    aroundNote: "Uber and Lyft are also available in the area, although we recommend arranging transportation in advance when possible."
   },
 
   /* ---------- Things to do ----------  category becomes a filter button */

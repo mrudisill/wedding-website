@@ -102,6 +102,26 @@ window.SITE = {
     ]
   },
 
+  /* ---------- Private room RSVP page: nicoleanddouglas.com/stay ----------
+     Not linked anywhere on the main site — only people you send the link to will find it.
+     formUrl: paste the Google Apps Script web app URL here (see README, "Room RSVP form").
+     password: optional extra lock, e.g. "saucon". Leave "" for none. */
+  stayPage: {
+    password: "",
+    formUrl: "",
+    title: "You're invited to stay with us",
+    venue: "at Saucon Valley Country Club",
+    script: "We're holding a room just for you.",
+    intro: "Please let us know whether you'd like the room we're holding for you.",
+    deadline: "",                                  // e.g. "August 1, 2027"
+    nights: ["Friday, October 1", "Saturday, October 2"],
+    yesText: "Yes, please hold my room",
+    noText: "No, please release it",
+    thanksTitle: "Thank you!",
+    thanksScript: "We can't wait to see you.",
+    thanksText: "We've received your reply. If anything changes, just let us know."
+  },
+
   /* ---------- Travel ----------  icon: car, plane, boat, bus, bike, pin */
   travel: {
     title: "Getting Here",

@@ -1,11 +1,12 @@
 # Wedding website template
 
-Three files make up the whole site:
-
 | File | What it is | Do you edit it? |
 |---|---|---|
-| `content.js` | All your words, dates, hotels, colors, password | **Yes, this is the only one** |
-| `index.html` | The design and animations | No (unless you want to) |
+| `content.js` | All your words, dates, hotels, colors, passwords | **Yes, this is the only one** |
+| `index.html` | The main page (nicoleanddouglas.com) | No (unless you want to) |
+| `stay.html` | Private room RSVP page (nicoleanddouglas.com/stay) | No |
+| `style.css` | The look shared by both pages | No |
+| `google-sheet-script.js` | Code to paste into Google Sheets for the room RSVP form | Copy once (see below) |
 | `photos/` | Your pictures | Drop images in here |
 
 ## Filling it in
@@ -53,3 +54,30 @@ go to the project's Domains settings, add the domain, and follow the steps it sh
 - Hand-drawn squiggles under every heading, slowly moving wave pattern, heart bursts on taps
 - "Add to calendar" downloads for each event or the whole weekend
 - Everything calms down automatically for people who have "reduce motion" turned on
+
+## Room RSVP form (nicoleanddouglas.com/stay)
+
+A separate page for the guests you're holding rooms for. It isn't linked from the main site,
+so only people you send the link to will find it. For an extra lock, set `stayPage.password`
+in `content.js`. Replies go into a Google Sheet that you own.
+
+**One-time setup (about 5 minutes, on a computer):**
+
+1. Go to sheets.google.com and create a blank spreadsheet. Name it something like "Room RSVPs".
+2. In the sheet, click **Extensions → Apps Script**.
+3. Delete what's in the editor, then copy everything from `google-sheet-script.js` and paste it in.
+   (Optional: put your email between the quotes on the `NOTIFY_EMAIL` line to get an email per reply.)
+4. Click the **Save** icon.
+5. Click **Deploy → New deployment**. Click the gear next to "Select type" and choose **Web app**.
+   - Execute as: **Me**
+   - Who has access: **Anyone**
+6. Click **Deploy**, then **Authorize access** and allow it with your Google account.
+   (Google may warn that the app isn't verified, because you wrote it. Click **Advanced → Go to … (unsafe)**.
+   It only has access to this one spreadsheet.)
+7. Copy the **Web app URL** (it ends in `/exec`) and paste it into `stayPage.formUrl` in `content.js`.
+8. Push the change. Then go to nicoleanddouglas.com/stay and send a test reply. It should appear
+   as a new row in a "Room RSVPs" tab.
+
+If you ever change the script, use **Deploy → Manage deployments → Edit → New version**,
+so the web app URL stays the same.
+

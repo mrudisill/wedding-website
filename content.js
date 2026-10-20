@@ -68,26 +68,24 @@ window.SITE = {
   },
 
   /* ---------- Schedule ----------
-     date: "YYYY-MM-DD", start/end: 24-hour "HH:MM" (or allDay: true)
+     date: "YYYY-MM-DD"
+     time: text to show, e.g. "TBD" or "6:00 PM". For calendar invites with exact times,
+           add start/end in 24-hour "HH:MM" (e.g. start: "18:00", end: "21:00").
      icon: drinks, rings, dinner, party, sun, coffee, heart */
   schedule: {
     title: "The Weekend",
     intro: "Here's what we have planned. Tap any event to add it to your calendar.",
     events: [
-      { name: "Welcome Drinks", icon: "drinks", date: "2027-10-01", start: "20:00", end: "22:00",
-        venue: "Venue Name", address: "123 Main Street, Bethlehem, PA", attire: "Summer cocktail",
-        note: "Kick off the weekend with us!" },
-      { name: "Ceremony", icon: "rings", date: "2027-10-02", start: "16:00", end: "17:00",
-        venue: "Ceremony Venue", address: "456 Chapel Road, Bethlehem, PA", attire: "Black-tie optional",
-        note: "Please arrive 15–30 minutes early." },
-      { name: "Reception", icon: "dinner", date: "2027-10-02", start: "17:30", end: "22:00",
-        venue: "Reception Venue", address: "789 Vineyard Lane, Bethlehem, PA", attire: "",
-        note: "Shuttles will run to and from the reception." },
-      { name: "After Party", icon: "party", date: "2027-10-02", start: "22:30", end: "02:00",
-        venue: "Local Bar", address: "12 Beach Avenue, Bethlehem, PA", attire: "", note: "" },
-      { name: "Farewell Brunch", icon: "coffee", date: "2027-10-03", allDay: false, start: "10:00", end: "12:00",
-        venue: "Brunch Spot", address: "34 Ocean Drive, Bethlehem, PA", attire: "Casual",
-        note: "Say goodbye before you head home." }
+      { name: "Welcome Drinks", icon: "drinks", date: "2027-10-01", time: "TBD",
+        venue: "Saucon Valley Country Club | Weyhill Guest House", address: "5450 Weyhill Farm Rd, Bethlehem, PA 18015",
+        attire: "Cocktail", note: "" },
+      { name: "Ceremony & Reception", icon: "rings", date: "2027-10-02", time: "TBD",
+        venue: "Saucon Valley Country Club", address: "2050 Saucon Valley Rd, Bethlehem, PA 18015",
+        attire: "Black Tie",
+        note: "Our ceremony, cocktails, dinner, and dancing will be held at Saucon Valley Country Club. We kindly ask that you are seated 15–20 minutes prior." },
+      { name: "After Party", icon: "party", date: "2027-10-02", time: "TBD",
+        venue: "Saucon Valley Country Club | Weyhill Guest House", address: "5450 Weyhill Farm Rd, Bethlehem, PA 18015",
+        attire: "", note: "" }
     ]
   },
 
@@ -128,16 +126,19 @@ window.SITE = {
 
   /* ---------- Travel ----------  icon: car, plane, boat, bus, bike, pin */
   travel: {
-    title: "Getting Here",
-    intro: "How to get to town — and how to get around once you're here.",
+    title: "Travel",
+    intro: "For our guests traveling from out of town, we've included some helpful information to make planning your trip as easy as possible.",
+    hereLabel: "Flying in",
     gettingHere: [
-      { icon: "car",   title: "By car",   text: "Add driving directions here." },
-      { icon: "plane", title: "By air",   text: "Add the closest airports here." }
+      { icon: "plane", title: "Philadelphia International Airport (PHL)", text: "Approximately 1 hour from Bethlehem by car." },
+      { icon: "plane", title: "Newark Liberty International Airport (EWR)", text: "Approximately 1.5 hours from Bethlehem by car." }
     ],
+    hereNote: "We recommend renting a car or arranging transportation in advance.",
+    aroundLabel: "Getting around",
     gettingAround: [
-      { icon: "bus",  title: "Wedding shuttle", text: "We'll run a shuttle to and from the reception. Schedule coming soon!" },
-      { icon: "bike", title: "Around town",     text: "Town is walkable, and bikes are available to rent." }
-    ]
+      { icon: "car", title: "Uber & Lyft", text: "Uber and Lyft are also available in the area, although we recommend arranging transportation in advance when possible." }
+    ],
+    aroundNote: ""
   },
 
   /* ---------- Things to do ----------  category becomes a filter button */

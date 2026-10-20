@@ -220,6 +220,7 @@ body.ready .rise{animation:rise 1s var(--d,0s) cubic-bezier(.2,.7,.2,1) forwards
 @keyframes wiggle{25%{transform:rotate(-12deg)}50%{transform:rotate(10deg)}75%{transform:rotate(-5deg)}}
 .tile h3{font:500 1.4rem/1.1 var(--serif);color:var(--primary);margin:4px 0 6px}
 .tile p{margin:0;font-size:.95rem;color:var(--muted)}
+.travel-note{margin:18px 0 0;text-align:center;font-style:italic;color:var(--primary)}
 
 /* ---------- Things to do ---------- */
 .chip{font:400 .8rem/1 var(--sans);padding:.65em 1.2em;border-radius:0;border:1px solid var(--line);background:var(--paper);color:var(--primary);cursor:pointer;transition:background .25s,color .25s,border-color .25s}

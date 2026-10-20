@@ -173,7 +173,7 @@ if (events.length) {
         <p class="label">${esc(e.date ? fmtDay(e.date) : "")}</p>
         <h3>${esc(e.name)}</h3>
         <dl>
-          ${row("Time", e.allDay ? "All day" : esc([e.start, e.end].filter(Boolean).map(fmtTime).join(" – ")))}
+          ${row("Time", e.time ? esc(e.time) : e.allDay ? "All day" : esc([e.start, e.end].filter(Boolean).map(fmtTime).join(" – ")))}
           ${row("Place", esc(e.venue))}
           ${e.address ? row("Address", `<a href="${mapUrl(e.address)}" target="_blank" rel="noopener">${esc(e.address)}</a>`) : ""}
           ${row("Attire", esc(e.attire))}
@@ -282,8 +282,10 @@ if (T && ((T.gettingHere || []).length || (T.gettingAround || []).length)) {
   const tiles = list => `<div class="tiles">${list.map((t, i) => `<div class="tile" data-reveal style="--d:${i * 80}ms">
       <div class="bubble">${icon(t.icon)}</div><div><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p></div></div>`).join("")}</div>`;
   $("#travel").innerHTML = `<div class="paper">${head(T.title, T.intro)}
-    ${(T.gettingHere || []).length ? `<div class="sub">Getting here</div>${tiles(T.gettingHere)}` : ""}
-    ${(T.gettingAround || []).length ? `<div class="sub">Getting around</div>${tiles(T.gettingAround)}` : ""}
+    ${(T.gettingHere || []).length ? `<div class="sub">${esc(T.hereLabel || "Getting here")}</div>${tiles(T.gettingHere)}` : ""}
+    ${T.hereNote ? `<p class="travel-note" data-reveal>${esc(T.hereNote)}</p>` : ""}
+    ${(T.gettingAround || []).length ? `<div class="sub">${esc(T.aroundLabel || "Getting around")}</div>${tiles(T.gettingAround)}` : ""}
+    ${T.aroundNote ? `<p class="travel-note" data-reveal>${esc(T.aroundNote)}</p>` : ""}
   </div>`;
 } else $("#travel").remove();
 

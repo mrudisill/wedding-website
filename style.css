@@ -54,7 +54,7 @@ p{margin:0 0 1em}
   background:radial-gradient(circle at 34% 30%,color-mix(in srgb,var(--primary) 65%,white),var(--primary) 50%,color-mix(in srgb,var(--primary) 70%,black));
   box-shadow:0 5px 12px rgb(0 0 0/.3),inset 0 0 0 5px color-mix(in srgb,var(--primary) 80%,black 20%),inset 0 0 0 7px color-mix(in srgb,var(--primary) 70%,white);
   animation:breathe 2.4s ease-in-out infinite;transition:transform .5s,opacity .5s}
-.seal .mono-svg{width:38px}
+.seal .crest{width:34px}
 .seal:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
 .env.open .seal{animation:none;transform:scale(.2) rotate(-50deg);opacity:0;pointer-events:none}
 @keyframes breathe{50%{transform:scale(1.07) rotate(-3deg)}}
@@ -88,12 +88,12 @@ body.menu-open .menu a{opacity:1;transform:none}
 .hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;color:var(--primary);overflow:hidden;isolation:isolate;padding:100px 16px 110px;background:var(--bg)}
 .hero::before{content:"";position:absolute;inset:clamp(10px,2.5vw,24px);border:1px solid var(--line);pointer-events:none;z-index:-1}
 .petals{position:absolute;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none}
-.mono-svg{display:block;width:100%;height:auto;overflow:visible}
-.hero-mono{width:clamp(72px,14vw,100px);margin:0 auto 22px}
-.hero-mono ellipse{stroke-dasharray:420;stroke-dashoffset:420}
-body.ready .hero-mono ellipse{animation:draw 1.8s .2s ease forwards}
-.hero-mono text{opacity:0}
-body.ready .hero-mono text{animation:fadein 1s .9s forwards}
+.crest{display:block;width:100%;aspect-ratio:750/870;background:currentColor;
+  -webkit-mask:url(crest.png) center/contain no-repeat;mask:url(crest.png) center/contain no-repeat}
+.hero-mono{width:clamp(78px,15vw,110px);margin:0 auto 24px}
+.hero-mono .crest{opacity:0;transform:scale(.82) rotate(-6deg)}
+body.ready .hero-mono .crest{animation:crest-in 1.4s .2s cubic-bezier(.2,.8,.25,1.15) forwards}
+@keyframes crest-in{to{opacity:1;transform:none}}
 @keyframes draw{to{stroke-dashoffset:0}}
 @keyframes fadein{to{opacity:1}}
 .names{display:inline-block;font:500 clamp(3rem,13.5vw,7.4rem)/.95 var(--serif);text-transform:uppercase;letter-spacing:.005em;margin:0;padding:.06em .25em .02em;

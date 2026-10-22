@@ -7,8 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
-<script src="content.js?v=202610192136"></script>
-<link rel="stylesheet" href="style.css?v=202610192136">
+<script src="content.js?v=202610212002"></script>
+<link rel="stylesheet" href="style.css?v=202610212002">
+<link rel="icon" type="image/png" href="crest.png">
 </head>
 <body class="locked">
 
@@ -110,11 +111,7 @@ const head = (title, intro, kicker) =>
   `<div class="sec-head" data-reveal>${kicker ? `<p class="label">${esc(kicker)}</p>` : ""}<h2 class="title">${esc(title)}</h2>${SQUIG}${intro ? `<p class="intro">${esc(intro)}</p>` : ""}</div>`;
 
 /* ---------- Colors & basics ---------- */
-const monoSvg = () => `<svg class="mono-svg" viewBox="0 0 100 120" aria-hidden="true">
-  <ellipse cx="50" cy="60" rx="47" ry="57" fill="none" stroke="currentColor" stroke-width="1.6"/>
-  <ellipse cx="50" cy="60" rx="42" ry="52" fill="none" stroke="currentColor" stroke-width=".8"/>
-  <text x="50" y="62" text-anchor="middle" dominant-baseline="central" fill="currentColor"
-    font-family="Cormorant Garamond, Georgia, serif" font-weight="300" font-size="${mono.length > 1 ? 38 : 66}">${esc(mono)}</text></svg>`;
+const monoSvg = () => `<span class="crest" aria-hidden="true"></span>`;
 const colorVars = { primary: "--primary", primaryDark: "--primary-deep", accent: "--accent", background: "--bg", card: "--paper", tint: "--tint1", tint2: "--tint2", text: "--ink" };
 for (const [k, v] of Object.entries(S.colors || {})) if (colorVars[k] && v) document.documentElement.style.setProperty(colorVars[k], v);
 

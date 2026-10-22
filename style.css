@@ -1,14 +1,14 @@
 :root{
-  --primary:#3b6a47; --primary-deep:#2a4d34; --accent:#7d9b84; --bg:#f4f6f3;
-  --paper:#fbfcfa; --tint1:#dfe5ea; --tint2:#e9eee8; --ink:#2d3a31;
+  --primary:#2B6F46; --primary-deep:#1F5233; --accent:#80A88E; --bg:#F7F9F8;
+  --paper:#FFFFFF; --tint1:#E4EFF3; --tint2:#E4EFF3; --ink:#24332A;
   --muted:color-mix(in srgb,var(--ink) 62%,var(--bg));
   --line:color-mix(in srgb,var(--primary) 22%,transparent);
-  --serif:"Cormorant Garamond",Georgia,serif; --body:"EB Garamond",Georgia,serif; --script:"Pinyon Script",cursive; --sans:"Jost",system-ui,sans-serif;
+  --serif:"Nanum Myeongjo",Georgia,serif; --body:"Nanum Myeongjo",Georgia,serif; --script:"Pinyon Script",cursive; --sans:"Roboto",system-ui,sans-serif;
   --radius:0px; --shadow:0 1px 2px rgb(0 0 0/.04),0 14px 34px -14px rgb(40 40 30/.28);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16.5px/1.75 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 body.locked{overflow:hidden}
 a{color:inherit}
 p{margin:0 0 1em}
@@ -81,7 +81,7 @@ body.menu-open .nav{color:var(--paper);background:transparent;box-shadow:none;ba
 .menu{position:fixed;inset:0;z-index:45;background:var(--primary-deep);color:var(--paper);display:flex;flex-direction:column;justify-content:center;gap:6px;padding:80px 32px;
   clip-path:circle(0 at calc(100% - 38px) 36px);transition:clip-path .65s cubic-bezier(.7,0,.2,1);visibility:hidden}
 body.menu-open .menu{clip-path:circle(150% at calc(100% - 38px) 36px);visibility:visible}
-.menu a{font:italic 400 2.5rem/1.2 var(--serif);text-decoration:none;opacity:0;transform:translateX(-18px);transition:opacity .4s,transform .4s;transition-delay:calc(var(--i)*55ms + .2s)}
+.menu a{font:400 2.2rem/1.25 var(--serif);text-transform:uppercase;text-decoration:none;opacity:0;transform:translateX(-18px);transition:opacity .4s,transform .4s;transition-delay:calc(var(--i)*55ms + .2s)}
 body.menu-open .menu a{opacity:1;transform:none}
 
 /* ---------- Hero ---------- */
@@ -99,7 +99,7 @@ body.ready .hero-mono .crest{animation:crest-in 1.4s .2s cubic-bezier(.2,.8,.25,
 .names{display:inline-block;font:500 clamp(3rem,13.5vw,7.4rem)/.95 var(--serif);text-transform:uppercase;letter-spacing:.005em;margin:0;padding:.06em .25em .02em;
   -webkit-mask-image:linear-gradient(90deg,#000 50%,transparent 60%);mask-image:linear-gradient(90deg,#000 50%,transparent 60%);
   -webkit-mask-size:220% 100%;mask-size:220% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:100% 0;mask-position:100% 0}
-.names .amp{font-style:italic;font-weight:400;text-transform:none}
+.names .amp{font-weight:400}
 body.ready .names{animation:write 2.2s .9s cubic-bezier(.45,0,.3,1) forwards}
 @keyframes write{to{-webkit-mask-position:0 0;mask-position:0 0}}
 .hero-date{font:400 clamp(2.9rem,12.5vw,6.8rem)/1 var(--serif);letter-spacing:.03em;font-variant-numeric:lining-nums;margin:.02em 0 .3em}
@@ -169,6 +169,7 @@ body.ready .rise{animation:rise 1s var(--d,0s) cubic-bezier(.2,.7,.2,1) forwards
 .ev dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:0 0 12px}
 .ev dt{font:500 .64rem/2.1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .ev dd{margin:0}
+.ev .sep{font-family:var(--sans);font-weight:400;color:var(--accent);margin:0 .1em}
 .ev dd a{text-decoration-color:var(--line);text-underline-offset:3px}
 .ev .note{color:var(--muted);font-size:.95rem}
 .ev-desc{margin:-.2em 0 .9em;color:var(--ink)}
@@ -261,7 +262,7 @@ body.ready .rise{animation:rise 1s var(--d,0s) cubic-bezier(.2,.7,.2,1) forwards
 @keyframes wiggle{25%{transform:rotate(-12deg)}50%{transform:rotate(10deg)}75%{transform:rotate(-5deg)}}
 .tile h3{font:500 1.4rem/1.1 var(--serif);color:var(--primary);margin:4px 0 6px}
 .tile p{margin:0;font-size:.95rem;color:var(--muted)}
-.travel-note{margin:18px 0 0;text-align:center;font-style:italic;color:var(--primary)}
+.travel-note{margin:18px 0 0;text-align:center;color:var(--primary)}
 .sub + .travel-note{text-align:left;font-style:normal;color:var(--ink);margin-top:0}
 
 /* ---------- Things to do ---------- */
@@ -308,7 +309,7 @@ body.ready .rise{animation:rise 1s var(--d,0s) cubic-bezier(.2,.7,.2,1) forwards
 .rsvp .squiggle{stroke:var(--paper)}
 .rsvp .title{color:var(--paper)}
 .rsvp .label{color:inherit;opacity:.8}
-.rsvp .deadline{font:italic 400 1.4rem var(--serif);margin:14px 0 30px}
+.rsvp .deadline{font:400 1.3rem var(--serif);margin:14px 0 30px}
 .big-btn{position:relative;overflow:hidden;font:2.4rem/1 var(--script);padding:.45em 1.6em .4em;border-radius:0;border:0;background:var(--paper);color:var(--primary);cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 10px 30px -10px rgb(0 0 0/.5);transition:transform .3s}
 .big-btn:hover{transform:translateY(-3px) scale(1.03)}
 .big-btn::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent) 35%,transparent),transparent);transform:skewX(-20deg);animation:shine 3.5s 1s infinite}

@@ -21,14 +21,25 @@ window.SITE = {
      Change these hex codes when you pick your colors.
      Some ready-made sets are at the bottom of this file. */
   colors: {
-    primary:     "#3b6a47",   // the invitation's green ink: headings, buttons, wax seal
-    primaryDark: "#2a4d34",   // menu background
-    accent:      "#7d9b84",   // soft sage: falling leaves, hearts, dashed stamps
-    background:  "#f4f6f3",   // off-white, like the save-the-date card
-    card:        "#fbfcfa",   // cards / paper
-    tint:        "#dfe5ea",   // pale blue-gray, like the room card + envelope
-    tint2:       "#e9eee8",   // pale sage
-    text:        "#2d3a31"    // body text
+    primary:     "#2B6F46",   // the couple's green: headings, buttons, crest, wax seal
+    primaryDark: "#1F5233",   // a deeper shade of that green (menu background)
+    accent:      "#80A88E",   // a soft tint of that green (small details)
+    background:  "#F7F9F8",   // near-white page background
+    card:        "#FFFFFF",   // cards / paper
+    tint:        "#E4EFF3",   // the couple's light blue: envelope + every other section
+    tint2:       "#E4EFF3",   // same light blue
+    text:        "#24332A"    // body text: a very dark green-gray
+  },
+
+  /* ---------- Fonts ----------
+     Nanum Myeongjo (headings + text) and Roboto (small capitals) load automatically.
+     MissLeGatees Pro is an Adobe Font, so it needs the couple's Adobe web project:
+       adobeKitId: the 7-character ID from https://use.typekit.net/XXXXXXX.css
+       scriptFamily: the font-family name Adobe shows for it in that project
+     Until both are filled in, the script lines use a similar free font (Pinyon Script). */
+  fonts: {
+    adobeKitId: "",
+    scriptFamily: ""
   },
 
   /* ---------- Envelope intro + password ----------

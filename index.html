@@ -6,9 +6,9 @@
 <title>Our Wedding</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
-<script src="content.js?v=202610212002"></script>
-<link rel="stylesheet" href="style.css?v=202610212002">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Roboto:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<script src="content.js?v=202610212047"></script>
+<link rel="stylesheet" href="style.css?v=202610212047">
 <link rel="icon" type="image/png" href="crest.png">
 </head>
 <body class="locked">
@@ -115,6 +115,15 @@ const monoSvg = () => `<span class="crest" aria-hidden="true"></span>`;
 const colorVars = { primary: "--primary", primaryDark: "--primary-deep", accent: "--accent", background: "--bg", card: "--paper", tint: "--tint1", tint2: "--tint2", text: "--ink" };
 for (const [k, v] of Object.entries(S.colors || {})) if (colorVars[k] && v) document.documentElement.style.setProperty(colorVars[k], v);
 
+/* Adobe Fonts (MissLeGatees Pro) once the kit ID is set in content.js */
+const F = S.fonts || {};
+if (/^[a-z0-9]{5,12}$/i.test(F.adobeKitId || "") && F.scriptFamily) {
+  const l = document.createElement("link");
+  l.rel = "stylesheet"; l.href = `https://use.typekit.net/${F.adobeKitId}.css`;
+  document.head.append(l);
+  document.documentElement.style.setProperty("--script", `"${F.scriptFamily.replace(/["\\]/g, "")}", "Pinyon Script", cursive`);
+}
+
 const C = S.couple || {};
 const mono = C.monogram || "";
 const both = `${C.one || ""} & ${C.two || ""}`;
@@ -173,7 +182,7 @@ if (events.length) {
         ${e.description ? `<p class="ev-desc">${esc(e.description)}</p>` : ""}
         <dl>
           ${row("Time", e.time ? esc(e.time) : e.allDay ? "All day" : esc([e.start, e.end].filter(Boolean).map(fmtTime).join(" – ")))}
-          ${row("Place", esc(e.venue))}
+          ${row("Place", esc(e.venue).replace(/ \| /g, ' <span class="sep">|</span> '))}
           ${e.address ? row("Address", `<a href="${mapUrl(e.address)}" target="_blank" rel="noopener">${esc(e.address)}</a>`) : ""}
           ${row("Attire", esc(e.attire))}
         </dl>

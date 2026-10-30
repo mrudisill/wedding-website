@@ -68,7 +68,7 @@ window.SITE = {
      ribbon: the scrolling green band under the top of the page.
      bands: full-width photos placed just before a section (schedule, stay, travel, gallery).
      position: which part of the photo to keep in view when it's cropped ("50% 50%" = center). */
-  ribbon: true,
+  ribbon: false,
   bands: [
     { before: "stay",   src: "photos/hands",   alt: "Nicole and Douglas holding hands", position: "50% 40%" },
     { before: "travel", src: "photos/walking", alt: "Nicole and Douglas walking hand in hand, looking back", position: "50% 62%" }

@@ -73,6 +73,16 @@ window.SITE = {
     { before: "stay",   src: "photos/hands",   alt: "Nicole and Douglas holding hands", position: "50% 40%" },
     { before: "travel", src: "photos/walking", alt: "Nicole and Douglas walking hand in hand, looking back", position: "50% 62%" }
   ],
+  /* ---------- Registry ----------
+     While links is empty, the section shows the text below.
+     Add registries as { name: "Zola", link: "https://..." } and they appear as buttons instead. */
+  registry: {
+    show: true,
+    title: "Registry",
+    text: "Coming soon!",
+    links: []
+  },
+
   gallery: {
     show: true,
     title: "Gallery",

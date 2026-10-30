@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Roboto:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
-<script src="content.js?v=202610301238"></script>
-<link rel="stylesheet" href="style.css?v=202610301238">
+<script src="content.js?v=202610301241"></script>
+<link rel="stylesheet" href="style.css?v=202610301241">
 <link rel="icon" type="image/png" href="crest.png">
 </head>
 <body class="locked">
@@ -66,6 +66,7 @@
   <section class="sec tone-blue" id="todo"></section>
   <section class="sec tone-ivory" id="attire"></section>
   <section class="sec tone-blue" id="faq"></section>
+  <section class="sec" id="registry"></section>
   <section class="sec gallery" id="gallery"></section>
   <section class="sec rsvp" id="rsvp"></section>
 </main>
@@ -384,6 +385,17 @@ if (R) {
   $("#rsvpBtn").addEventListener("click", e => burst(e.clientX, e.clientY, 18));
 } else $("#rsvp").remove();
 
+/* ---------- Registry ---------- */
+const REG = shown(S.registry) && S.registry;
+if (REG) {
+  const links = (REG.links || []).filter(l => l.name && l.link);
+  $("#registry").innerHTML = `<div class="paper registry">${head(REG.title || "Registry")}
+    ${links.length
+      ? `<div class="registry-links" data-reveal>${links.map(l => `<a class="btn" href="${esc(l.link)}" target="_blank" rel="noopener">${esc(l.name)} ${icon("arrow")}</a>`).join("")}</div>`
+      : `<p class="lead-script registry-soon" data-reveal>${esc(REG.text || "")}</p>`}
+  </div>`;
+} else $("#registry").remove();
+
 /* ---------- Gallery ---------- */
 const shots = shown(S.gallery) ? S.gallery.photos || [] : [];
 if (shots.length) {
@@ -443,7 +455,7 @@ secs.forEach((el, i) => { el.classList.remove("tone-blue", "tone-ivory"); el.cla
 if (secs[0]) $(".scroll-cue").setAttribute("href", "#" + secs[0].id);
 
 /* ---------- Nav + menu ---------- */
-const NAV = [["welcome", "Welcome"], ["schedule", "Schedule"], ["stay", "Stay"], ["travel", "Travel"], ["todo", "To-Do"], ["attire", "Attire"], ["faq", "FAQ"], ["gallery", "Gallery"], ["rsvp", "RSVP"]]
+const NAV = [["welcome", "Welcome"], ["schedule", "Schedule"], ["stay", "Stay"], ["travel", "Travel"], ["todo", "To-Do"], ["attire", "Attire"], ["faq", "FAQ"], ["registry", "Registry"], ["gallery", "Gallery"], ["rsvp", "RSVP"]]
   .filter(([id]) => document.getElementById(id));
 $("#navLinks").innerHTML = NAV.map(([id, t]) => `<li><a href="#${id}">${t}</a></li>`).join("");
 $("#menu").innerHTML = NAV.map(([id, t], i) => `<a href="#${id}" style="--i:${i}">${t}</a>`).join("");

@@ -324,6 +324,12 @@ footer p{margin:10px 0 0;color:var(--muted)}
 @keyframes hop{50%{transform:translateY(-4px)}}
 .heart{position:fixed;z-index:200;pointer-events:none;font-size:16px;line-height:1;color:var(--accent)}
 
+/* ---------- Registry ---------- */
+.registry{text-align:center}
+.registry .sec-head{margin-bottom:10px}
+.registry-soon{margin:8px 0 0;font-size:clamp(2.2rem,6vw,3rem)}
+.registry-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:22px}
+
 /* ---------- Photos: split hero, ribbon, bands, gallery, viewer ---------- */
 .hero-grid{display:grid;gap:clamp(48px,7vw,80px);align-items:center;justify-items:center;width:100%;max-width:1180px}
 .hero-text{text-align:center;min-width:0}

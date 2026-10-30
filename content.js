@@ -146,8 +146,6 @@ window.SITE = {
     intro: "You're invited to stay with us at Saucon Valley Country Club.",
     script: "We're holding a room just for you.",
     hotels: [
-      { name: "Saucon Valley Country Club", tag: "", address: "2050 Saucon Valley Rd, Bethlehem, PA 18015",
-        link: "https://www.sauconvalleycc.org/", price: 0, codeLabel: "Booking code", code: "", note: "" },
       { name: "Hotel Bethlehem", tag: "Less than 15 minutes from SVCC", address: "437 Main Street, Bethlehem, PA 18018",
         link: "https://www.hotelbethlehem.com/", price: 0, codeLabel: "Booking code", code: "", note: "" },
       { name: "Homewood Suites by Hilton Allentown Bethlehem Center Valley", tag: "Less than 5 minutes from SVCC",

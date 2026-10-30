@@ -59,7 +59,32 @@ window.SITE = {
   hero: {
     kicker: "Save our date",                       // shows as: SAVE OUR DATE — BETHLEHEM, PENNSYLVANIA
     tagline: "Formal invitation to follow",        // the script line under it
-    photo: ""                                      // optional, e.g. "photos/hero.jpg"
+    photo: "photos/cobblestone"                    // shown in the oval frame next to the names
+  },
+
+  /* ---------- Photos ----------
+     Each photo is in the photos folder in three sizes (name-640.jpg, name-1280.jpg, name-2000.jpg);
+     write just "photos/name" here. To add a photo, ask Claude to make the sizes, or add all three files.
+     ribbon: the scrolling green band under the top of the page.
+     bands: full-width photos placed just before a section (schedule, stay, travel, gallery).
+     position: which part of the photo to keep in view when it's cropped ("50% 50%" = center). */
+  ribbon: true,
+  bands: [
+    { before: "stay",   src: "photos/hands",   alt: "Nicole and Douglas holding hands", position: "50% 40%" },
+    { before: "travel", src: "photos/walking", alt: "Nicole and Douglas walking hand in hand, looking back", position: "50% 62%" }
+  ],
+  gallery: {
+    show: true,
+    title: "Gallery",
+    photos: [
+      { src: "photos/sidewalk", ratio: "640/960",    alt: "Nicole and Douglas smiling at each other on a sidewalk" },
+      { src: "photos/bar", ratio: "640/960",         alt: "Nicole and Douglas sitting together at a bar" },
+      { src: "photos/hands", ratio: "640/960",       alt: "Nicole and Douglas holding hands" },
+      { src: "photos/crosswalk", ratio: "640/960",   alt: "Nicole and Douglas standing at a crosswalk" },
+      { src: "photos/lounge", ratio: "640/960",      alt: "Nicole and Douglas smiling together in a lounge" },
+      { src: "photos/walking", ratio: "640/853",     alt: "Nicole and Douglas walking hand in hand, looking back" },
+      { src: "photos/cobblestone", ratio: "640/926", alt: "Nicole and Douglas walking down a cobblestone street" }
+    ]
   },
 
   /* ---------- Welcome note ---------- */

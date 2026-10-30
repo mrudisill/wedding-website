@@ -1,3 +1,8 @@
 .DS_Store
 .publish.sh
 .claude/
+# full-size originals stay on this computer; the site uses the copies in photos/
+/*.jpg
+/*.jpeg
+/*.JPG
+/*.JPEG

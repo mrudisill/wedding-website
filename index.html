@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Roboto:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
-<script src="content.js?v=202610212047"></script>
-<link rel="stylesheet" href="style.css?v=202610212047">
+<script src="content.js?v=202610301233"></script>
+<link rel="stylesheet" href="style.css?v=202610301233">
 <link rel="icon" type="image/png" href="crest.png">
 </head>
 <body class="locked">
@@ -44,17 +44,20 @@
 <main>
   <header class="hero" id="top">
     <canvas class="petals" id="petals"></canvas>
-    <div>
-      <div class="hero-mono" id="heroMono"></div>
-      <h1 class="names" id="heroNames"></h1>
-      <p class="hero-date rise" style="--d:2.2s" id="heroDate"></p>
-      <p class="label rise" style="--d:2.5s" id="heroLine"></p>
-      <p class="hero-script rise" style="--d:2.8s" id="heroScript"></p>
-      <div class="countdown rise" style="--d:3.1s" id="countdown"></div>
-      <div class="hero-photo rise" style="--d:3.3s" id="heroPhoto" hidden></div>
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-mono" id="heroMono"></div>
+        <h1 class="names" id="heroNames"></h1>
+        <p class="hero-date rise" style="--d:2.2s" id="heroDate"></p>
+        <p class="label rise" style="--d:2.5s" id="heroLine"></p>
+        <p class="hero-script rise" style="--d:2.8s" id="heroScript"></p>
+        <div class="countdown rise" style="--d:3.1s" id="countdown"></div>
+      </div>
+      <figure class="hero-oval" id="heroPhoto" hidden><img id="heroImg" alt=""></figure>
     </div>
     <a class="scroll-cue rise" style="--d:3.4s" href="#welcome" aria-label="Scroll down"></a>
   </header>
+  <div class="ribbon" id="ribbon" hidden aria-hidden="true"><div class="ribbon-track" id="ribbonTrack"></div></div>
 
   <section class="sec tone-blue" id="welcome"></section>
   <section class="sec tone-ivory" id="schedule"></section>
@@ -63,6 +66,7 @@
   <section class="sec tone-blue" id="todo"></section>
   <section class="sec tone-ivory" id="attire"></section>
   <section class="sec tone-blue" id="faq"></section>
+  <section class="sec gallery" id="gallery"></section>
   <section class="sec rsvp" id="rsvp"></section>
 </main>
 
@@ -73,6 +77,14 @@
 
 <button class="to-top" id="toTop" aria-label="Back to top"></button>
 
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <figure class="lb-stage"><img id="lbImg" alt=""></figure>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous photo"></button>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next photo"></button>
+  <button class="lb-close" id="lbClose" aria-label="Close photo viewer"></button>
+  <p class="lb-count" id="lbCount"></p>
+</div>
+
 <script>
 (() => {
 const S = window.SITE || {};
@@ -81,6 +93,10 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const FX = { leaves: false, hearts: false, ...(S.effects || {}) };
+/* Photos come in -640/-1280/-2000 sizes; a full file name (".jpg") is used as-is */
+const isFile = b => /\.(jpe?g|png|webp|gif)$/i.test(b);
+const imgAttrs = (b, sizes, w = 1280) => isFile(b) ? `src="${esc(b)}"`
+  : `src="${esc(b)}-${w}.jpg" srcset="${[640, 1280, 2000].map(x => `${esc(b)}-${x}.jpg ${x}w`).join(", ")}" sizes="${sizes}"`;
 const mapUrl = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
 const store = { get(k) { try { return sessionStorage.getItem(k); } catch { return null; } },
                 set(k, v) { try { sessionStorage.setItem(k, v); } catch {} } };
@@ -139,7 +155,19 @@ $("#heroNames").innerHTML = `${esc(C.one)} <span class="amp">&amp;</span><br>${e
 $("#heroDate").textContent = S.dateText || "";
 $("#heroLine").textContent = [H.kicker, S.location].filter(Boolean).join(" — ");
 $("#heroScript").textContent = H.tagline || "";
-if (H.photo) { $("#heroPhoto").hidden = false; $("#heroPhoto").style.backgroundImage = `url("${H.photo}")`; }
+if (H.photo) {
+  $("#heroPhoto").hidden = false;
+  $("#heroPhoto").innerHTML = `<span class="oval-clip"><img id="heroImg" ${imgAttrs(H.photo, "(min-width: 900px) 34vw, 78vw")} alt="${esc(both)}" fetchpriority="high"></span>`;
+  $(".hero").classList.add("has-photo");
+}
+
+/* ---------- Scrolling ribbon ---------- */
+if (S.ribbon !== false) {
+  const bits = [both, S.dateText, S.location].filter(Boolean).map(t => `<span>${esc(t)}</span><i class="crest" aria-hidden="true"></i>`).join("");
+  const run = `<div class="ribbon-run">${bits.repeat(3)}</div>`;
+  $("#ribbonTrack").innerHTML = run + run;
+  $("#ribbon").hidden = false;
+}
 
 /* ---------- Welcome ---------- */
 const shown = sec => sec && sec.show !== false;
@@ -356,13 +384,66 @@ if (R) {
   $("#rsvpBtn").addEventListener("click", e => burst(e.clientX, e.clientY, 18));
 } else $("#rsvp").remove();
 
+/* ---------- Gallery ---------- */
+const shots = shown(S.gallery) ? S.gallery.photos || [] : [];
+if (shots.length) {
+  $("#gallery").innerHTML = `<div class="gallery-wrap">${head(S.gallery.title || "", S.gallery.intro)}
+    <div class="masonry">${shots.map((p, i) => `<button class="shot" type="button" data-reveal style="--d:${(i % 3) * 110}ms" data-shot="${i}" aria-label="View photo ${i + 1} of ${shots.length}">
+      <img ${imgAttrs(p.src, "(min-width: 900px) 31vw, (min-width: 560px) 46vw, 92vw", 640)} alt="${esc(p.alt)}" loading="lazy" decoding="async"${p.ratio ? ` style="aspect-ratio:${esc(p.ratio)}"` : ""}></button>`).join("")}
+    </div></div>`;
+} else $("#gallery").remove();
+
+/* Full-width photo bands between sections */
+(S.bands || []).forEach(b => {
+  const target = document.getElementById(b.before);
+  if (!target || !b.src) return;
+  const fig = document.createElement("figure");
+  fig.className = "band";
+  fig.innerHTML = `<img ${imgAttrs(b.src, "100vw", 2000)} alt="${esc(b.alt)}" loading="lazy" decoding="async" style="object-position:${esc(b.position || "50% 50%")}">`;
+  target.before(fig);
+});
+
+/* Lightbox */
+const lb = $("#lightbox"), lbImg = $("#lbImg");
+let lbAt = 0, lbFrom = null;
+$("#lbPrev").innerHTML = icon("arrow"); $("#lbNext").innerHTML = icon("arrow");
+const lbShow = i => {
+  lbAt = (i + shots.length) % shots.length;
+  const p = shots[lbAt];
+  lbImg.classList.remove("lb-in"); void lbImg.offsetWidth;
+  lbImg.src = isFile(p.src) ? p.src : `${p.src}-2000.jpg`;
+  lbImg.alt = p.alt || "";
+  lbImg.classList.add("lb-in");
+  $("#lbCount").textContent = `${lbAt + 1} / ${shots.length}`;
+};
+const lbOpen = i => { lbFrom = document.activeElement; lb.hidden = false; document.body.classList.add("lb-open"); lbShow(i); $("#lbClose").focus(); };
+const lbClose = () => { lb.hidden = true; document.body.classList.remove("lb-open"); lbFrom?.focus(); };
+document.addEventListener("click", e => { const b = e.target.closest("[data-shot]"); if (b) lbOpen(+b.dataset.shot); });
+$("#lbPrev").addEventListener("click", () => lbShow(lbAt - 1));
+$("#lbNext").addEventListener("click", () => lbShow(lbAt + 1));
+$("#lbClose").addEventListener("click", lbClose);
+lb.addEventListener("click", e => { if (e.target === lb || e.target.classList.contains("lb-stage")) lbClose(); });
+document.addEventListener("keydown", e => {
+  if (lb.hidden) return;
+  if (e.key === "Escape") lbClose();
+  if (e.key === "ArrowLeft") lbShow(lbAt - 1);
+  if (e.key === "ArrowRight") lbShow(lbAt + 1);
+});
+let touchX = null;
+lb.addEventListener("touchstart", e => { touchX = e.touches[0].clientX; }, { passive: true });
+lb.addEventListener("touchend", e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX; touchX = null;
+  if (Math.abs(dx) > 40) lbShow(lbAt + (dx < 0 ? 1 : -1));
+});
+
 /* ---------- Keep backgrounds alternating and the scroll arrow pointing at the first section ---------- */
 const secs = $$("main > .sec:not(.rsvp)");
 secs.forEach((el, i) => { el.classList.remove("tone-blue", "tone-ivory"); el.classList.add(i % 2 ? "tone-ivory" : "tone-blue"); });
 if (secs[0]) $(".scroll-cue").setAttribute("href", "#" + secs[0].id);
 
 /* ---------- Nav + menu ---------- */
-const NAV = [["welcome", "Welcome"], ["schedule", "Schedule"], ["stay", "Stay"], ["travel", "Travel"], ["todo", "To-Do"], ["attire", "Attire"], ["faq", "FAQ"], ["rsvp", "RSVP"]]
+const NAV = [["welcome", "Welcome"], ["schedule", "Schedule"], ["stay", "Stay"], ["travel", "Travel"], ["todo", "To-Do"], ["attire", "Attire"], ["faq", "FAQ"], ["gallery", "Gallery"], ["rsvp", "RSVP"]]
   .filter(([id]) => document.getElementById(id));
 $("#navLinks").innerHTML = NAV.map(([id, t]) => `<li><a href="#${id}">${t}</a></li>`).join("");
 $("#menu").innerHTML = NAV.map(([id, t], i) => `<a href="#${id}" style="--i:${i}">${t}</a>`).join("");
@@ -397,6 +478,12 @@ function onScroll() {
   ticking = false;
   const y = scrollY, vh = innerHeight;
   nav.classList.toggle("solid", y > vh * .6);
+  if (!reduce) $$(".band").forEach(b => {
+    const r = b.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > vh) return;
+    const p = (r.top + r.height / 2 - vh / 2) / (vh + r.height); // -0.5 … 0.5 across the screen
+    b.style.setProperty("--shift", `${(p * -16).toFixed(2)}%`);
+  });
   toTop.classList.toggle("show", y > vh);
   if (tl) {
     const r = tl.getBoundingClientRect();

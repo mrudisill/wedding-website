@@ -164,7 +164,6 @@ window.SITE = {
     script: "We're holding a room just for you.",
     intro: "Accommodations are available at a rate of $500 per night, with payment collected directly by the club upon arrival.",
     deadline: "",                                  // e.g. "August 1, 2027"
-    nights: ["Friday, October 1", "Saturday, October 2"],
     yesText: "Yes, please hold my room",
     noText: "No, please release it",
     thanksTitle: "Thank you!",

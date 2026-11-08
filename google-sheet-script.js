@@ -9,7 +9,7 @@
 const NOTIFY_EMAIL = "";
 
 const SHEET_NAME = "Room RSVPs";
-const COLUMNS = ["Submitted", "Name", "Email", "Phone", "Staying?", "Nights", "Guests", "Notes"];
+const COLUMNS = ["Submitted", "Name", "Email", "Phone", "Staying?"];
 
 function doPost(e) {
   const p = (e && e.parameter) || {};
@@ -25,7 +25,7 @@ function doPost(e) {
       sheet.getRange(1, 1, 1, COLUMNS.length).setFontWeight("bold");
       sheet.setFrozenRows(1);
     }
-    const row = [new Date(), p.name, p.email, p.phone, p.staying, p.nights, p.guests, p.notes].map(clean);
+    const row = [new Date(), p.name, p.email, p.phone, p.staying].map(clean);
     sheet.appendRow(row);
 
     if (NOTIFY_EMAIL) {

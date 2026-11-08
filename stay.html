@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Roboto:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
-<script src="content.js?v=202611081723"></script>
-<link rel="stylesheet" href="style.css?v=202611081723">
+<script src="content.js?v=202611081859"></script>
+<link rel="stylesheet" href="style.css?v=202611081859">
 <link rel="icon" type="image/png" href="crest.png">
 <style>
 .stay-page{min-height:100svh;padding:clamp(24px,6vw,70px) 16px}
@@ -105,17 +105,6 @@ form.rsvp-form{text-align:left;margin-top:38px;display:grid;gap:24px}
           </div>
         </fieldset>
 
-        <fieldset class="field nights" id="nightsField" hidden>
-          <legend class="label">Which nights?</legend>
-          <div class="choices" id="nightChoices"></div>
-        </fieldset>
-
-        <label class="field" id="guestsField" hidden><span class="label">Guests in the room</span>
-          <select name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label>
-
-        <label class="field"><span class="label">Anything we should know?</span>
-          <textarea name="notes" rows="3" placeholder="Arrival time, accessibility needs, questions…"></textarea></label>
-
         <label class="hp" aria-hidden="true">Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
 
         <div class="submit-row">
@@ -167,8 +156,6 @@ $("#stayScript").textContent = P.script || "";
 $("#stayIntro").textContent = [P.intro, P.deadline ? `Please confirm by ${P.deadline}.` : ""].filter(Boolean).join(" ");
 $("#yesText").textContent = P.yesText || "Yes, please hold my room";
 $("#noText").textContent = P.noText || "No, please release it";
-$("#nightChoices").innerHTML = (P.nights || []).map(n =>
-  `<label class="choice"><input type="checkbox" name="nights" value="${esc(n)}" checked><span class="box"></span><span>${esc(n)}</span></label>`).join("");
 $("#thanksTitle").textContent = P.thanksTitle || "Thank you!";
 $("#thanksScript").textContent = P.thanksScript || "";
 $("#thanksText").textContent = P.thanksText || "";
@@ -188,16 +175,9 @@ $("#gateForm").addEventListener("submit", e => {
   }
 });
 
-/* Show nights + guests only when they're staying */
+/* Submit to the Google Sheet */
 const form = $("#rsvpForm");
 const f = n => form.elements.namedItem(n);
-form.addEventListener("change", () => {
-  const yes = f("staying").value === "Yes";
-  $("#nightsField").hidden = !yes || !(P.nights || []).length;
-  $("#guestsField").hidden = !yes;
-});
-
-/* Submit to the Google Sheet */
 form.addEventListener("submit", async e => {
   e.preventDefault();
   const msg = $("#formMsg"), btn = $("#submitBtn");
@@ -207,14 +187,10 @@ form.addEventListener("submit", async e => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = "That email address doesn't look quite right."; return; }
   if (!P.formUrl) { msg.textContent = "This form isn't connected yet — please check back soon."; return; }
 
-  const yes = f("staying").value === "Yes";
   const data = new URLSearchParams({
     name, email,
     phone: f("phone").value.trim(),
     staying: f("staying").value,
-    nights: yes ? [...form.querySelectorAll('input[name="nights"]:checked')].map(i => i.value).join(", ") : "",
-    guests: yes ? f("guests").value : "",
-    notes: f("notes").value.trim(),
     website: f("website").value
   });
   btn.disabled = true; btn.textContent = "Sending…";

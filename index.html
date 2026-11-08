@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Roboto:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
-<script src="content.js?v=202610301306"></script>
-<link rel="stylesheet" href="style.css?v=202610301306">
+<script src="content.js?v=202611081244"></script>
+<link rel="stylesheet" href="style.css?v=202611081244">
 <link rel="icon" type="image/png" href="crest.png">
 </head>
 <body class="locked">
@@ -43,20 +43,16 @@
 
 <main>
   <header class="hero" id="top">
+    <figure class="hero-bg" id="heroPhoto" hidden></figure>
     <canvas class="petals" id="petals"></canvas>
-    <div class="hero-grid">
-      <div class="hero-text">
-        <div class="hero-mono" id="heroMono"></div>
-        <h1 class="names" id="heroNames"></h1>
-        <p class="hero-date rise" style="--d:2.2s" id="heroDate"></p>
-        <p class="label rise" style="--d:2.5s" id="heroLine"></p>
-        <p class="hero-script rise" style="--d:2.8s" id="heroScript"></p>
-        <div class="countdown rise" style="--d:3.1s" id="countdown"></div>
-      </div>
-      <figure class="hero-oval" id="heroPhoto" hidden><img id="heroImg" alt=""></figure>
+    <div class="hero-text">
+      <h1 class="names" id="heroNames"></h1>
+      <p class="label hero-kicker rise" style="--d:2.2s" id="heroLine"></p>
+      <p class="hero-date rise" style="--d:2.5s" id="heroDate"></p>
     </div>
-    <a class="scroll-cue rise" style="--d:3.4s" href="#welcome" aria-label="Scroll down"></a>
+    <a class="scroll-cue rise" style="--d:2.9s" href="#date" aria-label="Scroll down"></a>
   </header>
+  <section class="std" id="date"></section>
   <div class="ribbon" id="ribbon" hidden aria-hidden="true"><div class="ribbon-track" id="ribbonTrack"></div></div>
 
   <section class="sec tone-blue" id="welcome"></section>
@@ -71,6 +67,7 @@
   <section class="sec rsvp" id="rsvp"></section>
 </main>
 
+<div class="stripes" aria-hidden="true"></div>
 <footer>
   <div class="mono" id="footMono"></div>
   <p id="footText"></p>
@@ -123,7 +120,7 @@ const ICONS = {
   star: '<path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.5 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/>'
 };
 const icon = n => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ICONS.heart}</svg>`;
-const SQUIG = '<svg class="squiggle" viewBox="0 0 150 16" aria-hidden="true"><path d="M2 8H58M92 8H148"/><ellipse cx="75" cy="8" rx="11" ry="6.5"/></svg>';
+const SQUIG = "";
 const head = (title, intro, kicker) =>
   `<div class="sec-head" data-reveal>${kicker ? `<p class="label">${esc(kicker)}</p>` : ""}<h2 class="title">${esc(title)}</h2>${SQUIG}${intro ? `<p class="intro">${esc(intro)}</p>` : ""}</div>`;
 
@@ -151,16 +148,30 @@ $("#footText").textContent = [both, S.dateText, S.location].filter(Boolean).join
 
 /* ---------- Hero ---------- */
 const H = S.hero || {};
-$("#heroMono").innerHTML = monoSvg();
-$("#heroNames").innerHTML = `${esc(C.one)} <span class="amp">&amp;</span><br>${esc(C.two)}`;
+$("#heroNames").innerHTML = `<span>${esc(C.one)}</span><span class="and">and</span><span>${esc(C.two)}</span>`;
 $("#heroDate").textContent = S.dateText || "";
-$("#heroLine").textContent = [H.kicker, S.location].filter(Boolean).join(" — ");
-$("#heroScript").textContent = H.tagline || "";
+$("#heroLine").textContent = H.kicker || "";
 if (H.photo) {
   $("#heroPhoto").hidden = false;
-  $("#heroPhoto").innerHTML = `<span class="oval-clip"><img id="heroImg" ${imgAttrs(H.photo, "(min-width: 900px) 34vw, 78vw")} alt="${esc(both)}" fetchpriority="high"></span>`;
+  $("#heroPhoto").innerHTML = `<img ${imgAttrs(H.photo, "100vw", 2000)} alt="${esc(both)}" fetchpriority="high" style="object-position:${esc(H.position || "50% 50%")}">`;
   $(".hero").classList.add("has-photo");
+  document.body.classList.add("photo-hero");
 }
+
+/* ---------- Save the date: framed photo + date and place ---------- */
+const shown = sec => sec && sec.show !== false;
+const D = shown(S.saveTheDate) && S.saveTheDate;
+if (D) {
+  $("#date").innerHTML = `<div class="std-wrap">
+    ${D.photo ? `<figure class="framed" data-reveal><img ${imgAttrs(D.photo, "(min-width: 820px) 400px, 84vw")} alt="${esc(D.alt)}" loading="lazy" decoding="async"></figure>` : ""}
+    <div class="std-text" data-reveal style="--d:.15s">
+      ${D.day ? `<p class="std-day">${esc(D.day)}</p>` : ""}
+      ${D.place ? `<p class="std-at">at</p><p class="std-place">${esc(D.place)}</p>` : ""}
+      ${D.city ? `<p class="label">${esc(D.city)}</p>` : ""}
+      <div class="countdown" id="countdown"></div>
+      ${H.tagline ? `<p class="std-note">${esc(H.tagline)}</p>` : ""}
+    </div></div>`;
+} else $("#date").remove();
 
 /* ---------- Scrolling ribbon ---------- */
 if (S.ribbon !== false) {
@@ -171,7 +182,6 @@ if (S.ribbon !== false) {
 }
 
 /* ---------- Welcome ---------- */
-const shown = sec => sec && sec.show !== false;
 const W = shown(S.welcome) && S.welcome;
 if (W) {
   const photos = (W.photos || []).slice(0, 5);
@@ -201,10 +211,8 @@ const events = S.schedule?.events || [];
 if (events.length) {
   const row = (k, v) => v ? `<dt>${k}</dt><dd>${v}</dd>` : "";
   $("#schedule").innerHTML = `<div class="paper">${head(S.schedule.title, S.schedule.intro)}
-    <div class="cal-all" data-reveal><button class="btn" data-ics="all">${icon("calendar")} Add all to calendar</button></div>
-    <div class="tl" id="tl"><div class="tl-line"><i></i></div>
-    ${events.map((e, i) => `<article class="tl-item" data-reveal>
-      <div class="tl-dot">${icon(e.icon)}</div>
+    <div class="details">
+    ${events.map((e, i) => `<article class="detail" data-reveal style="--d:${i * 120}ms">
       <div class="ev">
         ${e.date ? `<p class="label">${esc(fmtDay(e.date))}</p>` : ""}
         <h3>${esc(e.name)}</h3>
@@ -221,7 +229,9 @@ if (events.length) {
           ${e.address ? `<a class="chip-btn" href="${mapUrl(e.address)}" target="_blank" rel="noopener">${icon("pin")} Map</a>` : ""}
         </div>
       </div></article>`).join("")}
-    </div></div>`;
+    </div>
+    <div class="cal-all" data-reveal><button class="btn" data-ics="all">${icon("calendar")} Add all to calendar</button></div>
+    </div>`;
 } else $("#schedule").remove();
 
 /* Calendar file (.ics) */
@@ -262,24 +272,25 @@ document.addEventListener("click", e => {
 /* ---------- Hotels: hotel key tags ---------- */
 const hotels = S.stay?.hotels || [];
 if (hotels.length) {
-  $("#stay").innerHTML = `<div class="paper">${head(S.stay.title, S.stay.intro)}
-    ${S.stay.script ? `<p class="lead-script" style="text-align:center;margin:-18px 0 34px" data-reveal>${esc(S.stay.script)}</p>` : ""}
+  const st = S.stay;
+  if (st.photo) $("#stay").classList.add("photo-sec");
+  $("#stay").innerHTML = `${st.photo ? `<div class="sec-bg"><img ${imgAttrs(st.photo, "100vw", 2000)} alt="" loading="lazy" decoding="async" style="object-position:${esc(st.position || "50% 50%")}"></div>` : ""}
+    <div class="paper">${head(st.title, st.intro)}
+    ${st.script ? `<p class="lead-script" style="text-align:center;margin:-14px 0 40px" data-reveal>${esc(st.script)}</p>` : ""}
     ${hotels.filter(h => h.price).length > 1 ? `<div class="toolbar" data-reveal><button class="chip" id="sortBtn" aria-pressed="false">Sort by price ↑</button></div>` : ""}
-    <div class="keytags" id="hotelGrid">${hotels.map((h, i) => {
+    <div class="hotels" id="hotelGrid">${hotels.map((h, i) => {
       const p = Math.max(1, Math.min(3, +h.price || 0));
-      return `<article class="keytag" data-reveal style="--d:${i * 90}ms;--tilt:${[-2.5, 2, -1.5, 2.5, -2][i % 5]}deg" data-i="${i}" data-price="${h.price ? p : 0}">
-        <span class="keytag-ring" aria-hidden="true"></span>
-        <p class="keytag-no">No. ${pad(i + 1)}</p>
-        <h3>${h.link ? `<a class="keytag-link" href="${esc(h.link)}" target="_blank" rel="noopener">${esc(h.name)}</a>` : esc(h.name)}</h3>
-        ${h.tag ? `<p class="keytag-pill">${icon("car")}${esc(h.tag)}</p>` : ""}
-        ${h.address ? `<p class="keytag-addr">${esc(h.address)}</p>` : ""}
+      return `<article class="hotel" data-reveal style="--d:${i * 90}ms" data-i="${i}" data-price="${h.price ? p : 0}">
+        <h3>${h.link ? `<a class="hotel-link" href="${esc(h.link)}" target="_blank" rel="noopener">${esc(h.name)}</a>` : esc(h.name)}</h3>
+        ${h.address ? `<p class="hotel-addr">${esc(h.address)}</p>` : ""}
+        ${h.tag ? `<p class="hotel-tag">${esc(h.tag)}</p>` : ""}
         ${h.price ? `<div class="price">${"$".repeat(p)}<i>${"$".repeat(3 - p)}</i></div>` : ""}
-        ${h.code ? `<div class="keytag-code"><span class="label">${esc(h.codeLabel || "Code")}</span>
+        ${h.code ? `<div class="hotel-code"><span class="label">${esc(h.codeLabel || "Code")}</span>
           <span class="code">${esc(h.code)}</span><button class="copy" type="button" data-code="${esc(h.code)}">Copy</button></div>` : ""}
-        ${h.note ? `<p class="keytag-note">${esc(h.note)}</p>` : ""}
-        <div class="keytag-actions">
-          ${h.link ? `<span class="keytag-cta">Visit website ${icon("arrow")}</span>` : ""}
-          ${h.address ? `<a class="keytag-map" href="${mapUrl(h.address)}" target="_blank" rel="noopener">${icon("pin")} Directions</a>` : ""}
+        ${h.note ? `<p class="hotel-addr">${esc(h.note)}</p>` : ""}
+        <div class="hotel-actions">
+          ${h.link ? `<span class="hotel-cta">Website ${icon("arrow")}</span>` : ""}
+          ${h.address ? `<a class="hotel-map" href="${mapUrl(h.address)}" target="_blank" rel="noopener">${icon("pin")} Directions</a>` : ""}
         </div>
       </article>`;
     }).join("")}</div></div>`;
@@ -296,7 +307,7 @@ if (hotels.length) {
     sortMode = (sortMode + 1) % 3;
     ev.currentTarget.textContent = ["Sort by price ↑", "Price: low to high", "Price: high to low"][sortMode];
     ev.currentTarget.setAttribute("aria-pressed", sortMode ? "true" : "false");
-    const cards = $$(".keytag", grid);
+    const cards = $$(".hotel", grid);
     const first = new Map(cards.map(c => [c, c.getBoundingClientRect()]));
     cards.sort((a, b) => sortMode === 0 ? a.dataset.i - b.dataset.i : sortMode === 1 ? a.dataset.price - b.dataset.price : b.dataset.price - a.dataset.price)
       .forEach(c => grid.append(c));
@@ -310,8 +321,8 @@ if (hotels.length) {
 /* ---------- Travel ---------- */
 const T = S.travel;
 if (T && ((T.gettingHere || []).length || (T.gettingAround || []).length)) {
-  const tiles = list => `<div class="tiles">${list.map((t, i) => `<div class="tile" data-reveal style="--d:${i * 80}ms">
-      <div class="bubble">${icon(t.icon)}</div><div><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p></div></div>`).join("")}</div>`;
+  const tiles = list => `<div class="facts">${list.map((t, i) => `<div class="fact" data-reveal style="--d:${i * 80}ms">
+      <p class="fact-h">${esc(t.title)}</p><p>${esc(t.text)}</p></div>`).join("")}</div>`;
   $("#travel").innerHTML = `<div class="paper">${head(T.title, T.intro)}
     ${(T.gettingHere || []).length ? `<div class="sub">${esc(T.hereLabel || "Getting here")}</div>${tiles(T.gettingHere)}` : ""}
     ${T.hereNote ? `<p class="travel-note" data-reveal>${esc(T.hereNote)}</p>` : ""}
@@ -389,11 +400,11 @@ if (R) {
 const REG = shown(S.registry) && S.registry;
 if (REG) {
   const links = (REG.links || []).filter(l => l.name && l.link);
-  $("#registry").innerHTML = `<div class="paper registry">${head(REG.title || "Registry")}
+  $("#registry").innerHTML = `<div class="paper registry"><div class="frame" data-reveal>${head(REG.title || "Registry")}
     ${links.length
-      ? `<div class="registry-links" data-reveal>${links.map(l => `<a class="btn" href="${esc(l.link)}" target="_blank" rel="noopener">${esc(l.name)} ${icon("arrow")}</a>`).join("")}</div>`
-      : `<p class="lead-script registry-soon" data-reveal>${esc(REG.text || "")}</p>`}
-  </div>`;
+      ? `<div class="registry-links">${links.map(l => `<a class="btn" href="${esc(l.link)}" target="_blank" rel="noopener">${esc(l.name)} ${icon("arrow")}</a>`).join("")}</div>`
+      : `<p class="registry-soon">${esc(REG.text || "")}</p>`}
+  </div></div>`;
 } else $("#registry").remove();
 
 /* ---------- Gallery ---------- */
@@ -450,9 +461,12 @@ lb.addEventListener("touchend", e => {
 });
 
 /* ---------- Keep backgrounds alternating and the scroll arrow pointing at the first section ---------- */
-const secs = $$("main > .sec:not(.rsvp)");
-secs.forEach((el, i) => { el.classList.remove("tone-blue", "tone-ivory"); el.classList.add(i % 2 ? "tone-ivory" : "tone-blue"); });
-if (secs[0]) $(".scroll-cue").setAttribute("href", "#" + secs[0].id);
+/* Cream and green take turns; a section with a background photo sits outside the pattern */
+$$("main > .photo-sec").forEach(el => el.classList.remove("tone-blue", "tone-ivory"));
+const secs = $$("main > .sec:not(.rsvp):not(.photo-sec)");
+secs.forEach((el, i) => { el.classList.remove("tone-blue", "tone-ivory", "tone-green"); el.classList.add(i % 2 ? "tone-ivory" : "tone-green"); });
+const first = $("main > .std, main > .sec");
+if (first) $(".scroll-cue").setAttribute("href", "#" + first.id);
 
 /* ---------- Nav + menu ---------- */
 const NAV = [["welcome", "Welcome"], ["schedule", "Schedule"], ["stay", "Stay"], ["travel", "Travel"], ["todo", "To-Do"], ["attire", "Attire"], ["faq", "FAQ"], ["registry", "Registry"], ["gallery", "Gallery"], ["rsvp", "RSVP"]]
@@ -490,7 +504,7 @@ function onScroll() {
   ticking = false;
   const y = scrollY, vh = innerHeight;
   nav.classList.toggle("solid", y > vh * .6);
-  if (!reduce) $$(".band").forEach(b => {
+  if (!reduce) $$(".band, .sec-bg").forEach(b => {
     const r = b.getBoundingClientRect();
     if (r.bottom < 0 || r.top > vh) return;
     const p = (r.top + r.height / 2 - vh / 2) / (vh + r.height); // -0.5 … 0.5 across the screen
@@ -512,7 +526,7 @@ onScroll();
 /* ---------- Countdown ---------- */
 const target = new Date(S.date);
 const cdEl = $("#countdown");
-if (isNaN(target)) cdEl.remove();
+if (!cdEl || isNaN(target)) cdEl?.remove();
 else {
   cdEl.innerHTML = ["Days", "Hours", "Mins", "Secs"].map(u => `<div class="cd"><b>0</b><small>${u}</small></div>`).join("");
   const cells = $$("b", cdEl);

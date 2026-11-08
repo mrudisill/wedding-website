@@ -24,10 +24,10 @@ window.SITE = {
     primary:     "#2B6F46",   // the couple's green: headings, buttons, crest, wax seal
     primaryDark: "#1F5233",   // a deeper shade of that green (menu background)
     accent:      "#80A88E",   // a soft tint of that green (small details)
-    background:  "#F7F9F8",   // near-white page background
-    card:        "#FFFFFF",   // cards / paper
-    tint:        "#E4EFF3",   // the couple's light blue: envelope + every other section
-    tint2:       "#E4EFF3",   // same light blue
+    background:  "#F6F1E7",   // warm cream page background (every other section is solid green)
+    card:        "#FBF8F2",   // lighter cream for small boxes
+    tint:        "#E9E1CF",   // deeper cream: the envelope
+    tint2:       "#E9E1CF",   // same deeper cream
     text:        "#24332A"    // body text: a very dark green-gray
   },
 
@@ -57,9 +57,21 @@ window.SITE = {
 
   /* ---------- Top of page ---------- */
   hero: {
-    kicker: "Save our date",                       // shows as: SAVE OUR DATE — BETHLEHEM, PENNSYLVANIA
-    tagline: "Formal invitation to follow",        // the script line under it
-    photo: "photos/cobblestone"                    // shown in the oval frame next to the names
+    kicker: "Are getting married",                 // small capitals under the names
+    tagline: "Formal invitation to follow",        // script line under the countdown
+    photo: "photos/cobblestone",                   // fills the whole top of the page, names on top
+    position: "50% 62%"                           // which part of the photo stays in view ("50% 50%" = center)
+  },
+
+  /* ---------- Save the date ----------
+     The framed black-and-white photo next to the date, just under the top of the page. */
+  saveTheDate: {
+    show: true,
+    photo: "photos/walking",
+    alt: "Nicole and Douglas walking hand in hand, looking back",
+    day: "October 2nd",
+    place: "Saucon Valley Country Club",
+    city: "Bethlehem, Pennsylvania"
   },
 
   /* ---------- Photos ----------
@@ -69,10 +81,8 @@ window.SITE = {
      bands: full-width photos placed just before a section (schedule, stay, travel, gallery).
      position: which part of the photo to keep in view when it's cropped ("50% 50%" = center). */
   ribbon: false,
-  bands: [
-    { before: "stay",   src: "photos/hands",   alt: "Nicole and Douglas holding hands", position: "50% 40%" },
-    { before: "travel", src: "photos/walking", alt: "Nicole and Douglas walking hand in hand, looking back", position: "50% 62%" }
-  ],
+  bands: [],
+  /* e.g. { before: "gallery", src: "photos/bar", alt: "Nicole and Douglas at the bar", position: "50% 50%" } */
   /* ---------- Registry ----------
      While links is empty, the section shows the text below.
      Add registries as { name: "Zola", link: "https://..." } and they appear as buttons instead. */
@@ -145,6 +155,8 @@ window.SITE = {
     title: "Where to Stay",
     intro: "You're invited to stay with us at Saucon Valley Country Club.",
     script: "We're holding a room just for you.",
+    photo: "photos/crosswalk",                     // the photo behind the hotel cards ("" = plain green)
+    position: "50% 30%",
     hotels: [
       { name: "Hotel Bethlehem", tag: "Less than 15 minutes from SVCC", address: "437 Main Street, Bethlehem, PA 18018",
         link: "https://www.hotelbethlehem.com/", price: 0, codeLabel: "Booking code", code: "", note: "" },

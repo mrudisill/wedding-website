@@ -45,7 +45,7 @@ window.SITE = {
   /* ---------- Envelope intro + password ----------
      password: "" means no password (guests just tap the seal).
      Note: this keeps casual visitors out, but it is not real security. */
-  intro: true,
+  intro: false,                                    // false = guests land straight on the page (true brings the envelope back)
   password: "",
 
   /* ---------- Extra animations ----------

@@ -113,8 +113,7 @@ window.SITE = {
     kicker: "A note from us",
     title: "Welcome!",
     paragraphs: [
-      "We are so excited to celebrate with you. Everything you need for the weekend is on this page — the schedule, where to stay, how to get here and a few of our favorite spots.",
-      "If you have any questions that aren't answered here, please reach out any time."
+      "We're so excited to welcome you to our hometown of Bethlehem, Pennsylvania, for our wedding weekend! We can't wait to celebrate!"
     ],
     signature: "Nicole & Douglas",
     photos: [
@@ -153,8 +152,6 @@ window.SITE = {
      code/note: optional booking code and a short note shown on the card. */
   stay: {
     title: "Where to Stay",
-    intro: "You're invited to stay with us at Saucon Valley Country Club.",
-    script: "We're holding a room just for you.",
     photo: "photos/bar",                           // framed photo beside the hotel list ("" = no photo)
     alt: "Nicole and Douglas sitting together at a bar",
     hotels: [
@@ -166,7 +163,7 @@ window.SITE = {
       { name: "SpringHill Suites by Marriott Allentown Bethlehem/Center Valley", tag: "Less than 5 minutes from SVCC",
         address: "3800 West Drive, Center Valley, PA 18034",
         link: "https://www.marriott.com/en-us/hotels/abecv-springhill-suites-allentown-bethlehem-center-valley/overview/", price: 0, codeLabel: "Booking code", code: "", note: "" },
-      { name: "Wind Creek Bethlehem", tag: "Less than 15 minutes from SVCC", address: "77 Wind Creek Blvd, Bethlehem, PA 18015",
+      { name: "Wind Creek Bethlehem Casino", tag: "Less than 15 minutes from SVCC", address: "77 Wind Creek Blvd, Bethlehem, PA 18015",
         link: "https://windcreek.com/bethlehem", price: 0, codeLabel: "Booking code", code: "", note: "" }
     ]
   },
@@ -198,7 +195,8 @@ window.SITE = {
     hereLabel: "Flying in",
     gettingHere: [
       { icon: "plane", title: "Philadelphia International Airport (PHL)", text: "Approximately 1 hour from Bethlehem by car." },
-      { icon: "plane", title: "Newark Liberty International Airport (EWR)", text: "Approximately 1.5 hours from Bethlehem by car." }
+      { icon: "plane", title: "Newark Liberty International Airport (EWR)", text: "Approximately 1.5 hours from Bethlehem by car." },
+      { icon: "plane", title: "Lehigh Valley International Airport (ABE)", text: "Approximately 15 minutes from Bethlehem by car." }
     ],
     hereNote: "We recommend renting a car or arranging transportation in advance.",
     aroundLabel: "Getting around",
@@ -220,20 +218,6 @@ window.SITE = {
     ]
   },
 
-  /* ---------- Dress code ----------  palette: optional color swatches */
-  attire: {
-    show: false,                                   // hidden until the real wording is in — change to true to show
-    title: "What to Wear",
-    intro: "",
-    looks: [
-      { event: "Welcome Drinks", code: "Summer Cocktail",
-        text: "Dresses of any length; button-downs and pants. Jackets optional.",
-        palette: ["#f2d7c9", "#e4ead8", "#c9d9e8"] },
-      { event: "Ceremony & Reception", code: "Black-tie Optional",
-        text: "Floor-length dresses; tuxedos or dark suits. The reception is on grass — block heels recommended!",
-        palette: ["#3e4a35", "#d9958f", "#f4e9d8"] }
-    ]
-  },
 
   /* ---------- FAQ ---------- */
   faq: {

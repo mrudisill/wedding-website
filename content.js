@@ -24,10 +24,10 @@ window.SITE = {
     primary:     "#2B6F46",   // the couple's green: headings, buttons, crest, wax seal
     primaryDark: "#1F5233",   // a deeper shade of that green (menu background)
     accent:      "#80A88E",   // a soft tint of that green (small details)
-    background:  "#F6F1E7",   // warm cream page background (every other section is solid green)
-    card:        "#FBF8F2",   // lighter cream for small boxes
-    tint:        "#E9E1CF",   // deeper cream: the envelope
-    tint2:       "#E9E1CF",   // same deeper cream
+    background:  "#FDFCFA",   // soft white page background (every other section is solid green)
+    card:        "#FFFFFF",   // pure white for small boxes
+    tint:        "#F0EDE6",   // light warm grey: the envelope
+    tint2:       "#F0EDE6",   // same light warm grey
     text:        "#24332A"    // body text: a very dark green-gray
   },
 
@@ -42,6 +42,8 @@ window.SITE = {
     scriptFamily: ""
   },
 
+
+  intro: false,   // false = guests land straight on the page (true brings the envelope back)
 
   /* ---------- Top of page ---------- */
   hero: {

@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Roboto:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
-<script src="content.js?v=202611081244"></script>
-<link rel="stylesheet" href="style.css?v=202611081244">
+<script src="content.js?v=202611081254"></script>
+<link rel="stylesheet" href="style.css?v=202611081254">
 <link rel="icon" type="image/png" href="crest.png">
 </head>
 <body class="locked">
@@ -273,27 +273,29 @@ document.addEventListener("click", e => {
 const hotels = S.stay?.hotels || [];
 if (hotels.length) {
   const st = S.stay;
-  if (st.photo) $("#stay").classList.add("photo-sec");
-  $("#stay").innerHTML = `${st.photo ? `<div class="sec-bg"><img ${imgAttrs(st.photo, "100vw", 2000)} alt="" loading="lazy" decoding="async" style="object-position:${esc(st.position || "50% 50%")}"></div>` : ""}
-    <div class="paper">${head(st.title, st.intro)}
-    ${st.script ? `<p class="lead-script" style="text-align:center;margin:-14px 0 40px" data-reveal>${esc(st.script)}</p>` : ""}
-    ${hotels.filter(h => h.price).length > 1 ? `<div class="toolbar" data-reveal><button class="chip" id="sortBtn" aria-pressed="false">Sort by price ↑</button></div>` : ""}
-    <div class="hotels" id="hotelGrid">${hotels.map((h, i) => {
+  $("#stay").innerHTML = `<div class="stay-split${st.photo ? "" : " no-photo"}">
+    ${st.photo ? `<figure class="framed" data-reveal><img ${imgAttrs(st.photo, "(min-width: 900px) 380px, 84vw")} alt="${esc(st.alt)}" loading="lazy" decoding="async"></figure>` : ""}
+    <div class="stay-panel on-green" data-reveal style="--d:.12s">${head(st.title, st.intro)}
+    ${st.script ? `<p class="lead-script stay-script">${esc(st.script)}</p>` : ""}
+    ${hotels.filter(h => h.price).length > 1 ? `<div class="toolbar"><button class="chip" id="sortBtn" aria-pressed="false">Sort by price ↑</button></div>` : ""}
+    <ul class="hotel-list" id="hotelGrid">${hotels.map((h, i) => {
       const p = Math.max(1, Math.min(3, +h.price || 0));
-      return `<article class="hotel" data-reveal style="--d:${i * 90}ms" data-i="${i}" data-price="${h.price ? p : 0}">
-        <h3>${h.link ? `<a class="hotel-link" href="${esc(h.link)}" target="_blank" rel="noopener">${esc(h.name)}</a>` : esc(h.name)}</h3>
-        ${h.address ? `<p class="hotel-addr">${esc(h.address)}</p>` : ""}
-        ${h.tag ? `<p class="hotel-tag">${esc(h.tag)}</p>` : ""}
-        ${h.price ? `<div class="price">${"$".repeat(p)}<i>${"$".repeat(3 - p)}</i></div>` : ""}
-        ${h.code ? `<div class="hotel-code"><span class="label">${esc(h.codeLabel || "Code")}</span>
-          <span class="code">${esc(h.code)}</span><button class="copy" type="button" data-code="${esc(h.code)}">Copy</button></div>` : ""}
-        ${h.note ? `<p class="hotel-addr">${esc(h.note)}</p>` : ""}
+      return `<li class="hotel" data-i="${i}" data-price="${h.price ? p : 0}">
+        <div class="hotel-main">
+          <h3>${h.link ? `<a class="hotel-link" href="${esc(h.link)}" target="_blank" rel="noopener">${esc(h.name)}</a>` : esc(h.name)}</h3>
+          ${h.tag ? `<p class="hotel-tag">${esc(h.tag)}</p>` : ""}
+          ${h.address ? `<p class="hotel-addr">${esc(h.address)}</p>` : ""}
+          ${h.price ? `<div class="price">${"$".repeat(p)}<i>${"$".repeat(3 - p)}</i></div>` : ""}
+          ${h.code ? `<div class="hotel-code"><span class="label">${esc(h.codeLabel || "Code")}</span>
+            <span class="code">${esc(h.code)}</span><button class="copy" type="button" data-code="${esc(h.code)}">Copy</button></div>` : ""}
+          ${h.note ? `<p class="hotel-addr">${esc(h.note)}</p>` : ""}
+        </div>
         <div class="hotel-actions">
           ${h.link ? `<span class="hotel-cta">Website ${icon("arrow")}</span>` : ""}
           ${h.address ? `<a class="hotel-map" href="${mapUrl(h.address)}" target="_blank" rel="noopener">${icon("pin")} Directions</a>` : ""}
         </div>
-      </article>`;
-    }).join("")}</div></div>`;
+      </li>`;
+    }).join("")}</ul></div></div>`;
   const grid = $("#hotelGrid");
   grid.addEventListener("click", e => {
     const copy = e.target.closest(".copy");
@@ -461,9 +463,8 @@ lb.addEventListener("touchend", e => {
 });
 
 /* ---------- Keep backgrounds alternating and the scroll arrow pointing at the first section ---------- */
-/* Cream and green take turns; a section with a background photo sits outside the pattern */
-$$("main > .photo-sec").forEach(el => el.classList.remove("tone-blue", "tone-ivory"));
-const secs = $$("main > .sec:not(.rsvp):not(.photo-sec)");
+/* Cream and green take turns */
+const secs = $$("main > .sec:not(.rsvp)");
 secs.forEach((el, i) => { el.classList.remove("tone-blue", "tone-ivory", "tone-green"); el.classList.add(i % 2 ? "tone-ivory" : "tone-green"); });
 const first = $("main > .std, main > .sec");
 if (first) $(".scroll-cue").setAttribute("href", "#" + first.id);
@@ -504,7 +505,7 @@ function onScroll() {
   ticking = false;
   const y = scrollY, vh = innerHeight;
   nav.classList.toggle("solid", y > vh * .6);
-  if (!reduce) $$(".band, .sec-bg").forEach(b => {
+  if (!reduce) $$(".band").forEach(b => {
     const r = b.getBoundingClientRect();
     if (r.bottom < 0 || r.top > vh) return;
     const p = (r.top + r.height / 2 - vh / 2) / (vh + r.height); // -0.5 … 0.5 across the screen

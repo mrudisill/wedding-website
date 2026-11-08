@@ -155,8 +155,8 @@ window.SITE = {
     title: "Where to Stay",
     intro: "You're invited to stay with us at Saucon Valley Country Club.",
     script: "We're holding a room just for you.",
-    photo: "photos/crosswalk",                     // the photo behind the hotel cards ("" = plain green)
-    position: "50% 30%",
+    photo: "photos/bar",                           // framed photo beside the hotel list ("" = no photo)
+    alt: "Nicole and Douglas sitting together at a bar",
     hotels: [
       { name: "Hotel Bethlehem", tag: "Less than 15 minutes from SVCC", address: "437 Main Street, Bethlehem, PA 18018",
         link: "https://www.hotelbethlehem.com/", price: 0, codeLabel: "Booking code", code: "", note: "" },

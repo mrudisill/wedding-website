@@ -59,16 +59,16 @@ window.SITE = {
   hero: {
     kicker: "Are getting married",                 // small capitals under the names
     tagline: "Formal invitation to follow",        // script line under the countdown
-    photo: "photos/cobblestone",                   // fills the whole top of the page, names on top
-    position: "50% 62%"                           // which part of the photo stays in view ("50% 50%" = center)
+    photo: "photos/walking",                       // fills the whole top of the page, names on top
+    position: "50% 35%"                       // which part of the photo stays in view ("50% 50%" = center)
   },
 
   /* ---------- Save the date ----------
-     The framed black-and-white photo next to the date, just under the top of the page. */
+     The framed photo next to the date, just under the top of the page. */
   saveTheDate: {
     show: true,
-    photo: "photos/walking",
-    alt: "Nicole and Douglas walking hand in hand, looking back",
+    photo: "photos/cobblestone",
+    alt: "Nicole and Douglas walking down a cobblestone street",
     day: "October 2nd",
     place: "Saucon Valley Country Club",
     city: "Bethlehem, Pennsylvania"

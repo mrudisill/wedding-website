@@ -42,23 +42,10 @@ window.SITE = {
     scriptFamily: ""
   },
 
-  /* ---------- Envelope intro + password ----------
-     password: "" means no password (guests just tap the seal).
-     Note: this keeps casual visitors out, but it is not real security. */
-  intro: false,                                    // false = guests land straight on the page (true brings the envelope back)
-  password: "",
-
-  /* ---------- Extra animations ----------
-     true = on, false = off */
-  effects: {
-    leaves: false,   // little leaves/petals drifting down the top of the page
-    hearts: false    // tiny hearts that burst out when buttons are tapped
-  },
 
   /* ---------- Top of page ---------- */
   hero: {
     kicker: "Are getting married",                 // small capitals under the names
-    tagline: "Formal invitation to follow",        // script line under the countdown
     photo: "photos/walking",                       // fills the whole top of the page, names on top
     position: "50% 35%"                       // which part of the photo stays in view ("50% 50%" = center)
   },
@@ -115,12 +102,7 @@ window.SITE = {
     paragraphs: [
       "We're so excited to welcome you to our hometown of Bethlehem, Pennsylvania, for our wedding weekend! We can't wait to celebrate!"
     ],
-    signature: "Nicole & Douglas",
-    photos: [
-      { src: "", caption: "Where it began" },
-      { src: "", caption: "The proposal" },
-      { src: "", caption: "Us, always" }
-    ]
+    signature: "Nicole & Douglas"
   },
 
   /* ---------- Schedule ----------

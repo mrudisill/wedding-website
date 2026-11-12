@@ -158,7 +158,7 @@ window.SITE = {
      password: optional extra lock, e.g. "saucon". Leave "" for none. */
   stayPage: {
     password: "",
-    formUrl: "",
+    formUrl: "https://script.google.com/macros/s/AKfycbxkRJ74FTOLuTXstoBgSaRldaYHEcePa_pYfKy5CgTF6a7wgydu42kd7PLyM8BcAwh7/exec",
     title: "You're invited to stay with us",
     venue: "at Saucon Valley Country Club",
     script: "We're holding a room just for you.",

@@ -92,7 +92,13 @@ window.SITE = {
       { src: "photos/crosswalk", ratio: "640/960",   alt: "Nicole and Douglas standing at a crosswalk" },
       { src: "photos/lounge", ratio: "640/960",      alt: "Nicole and Douglas smiling together in a lounge" },
       { src: "photos/walking", ratio: "640/853",     alt: "Nicole and Douglas walking hand in hand, looking back" },
-      { src: "photos/cobblestone", ratio: "640/926", alt: "Nicole and Douglas walking down a cobblestone street" }
+      { src: "photos/cobblestone", ratio: "640/926", alt: "Nicole and Douglas walking down a cobblestone street" },
+      { src: "photos/alley", ratio: "640/960",       alt: "Douglas holding Nicole's face on a city street under a green skybridge" },
+      { src: "photos/boardwalk", ratio: "640/960",   alt: "Nicole and Douglas walking toward the camera on a wet boardwalk" },
+      { src: "photos/warehouse", ratio: "640/942",   alt: "Nicole and Douglas standing on a cobblestone street in front of a brick warehouse" },
+      { src: "photos/arches", ratio: "640/960",      alt: "Nicole and Douglas walking across cobblestones past brick arches" },
+      { src: "photos/garden-path", ratio: "640/960", alt: "Nicole and Douglas looking at each other on a tree-lined boardwalk" },
+      { src: "photos/doorway", ratio: "640/960",     alt: "Nicole and Douglas smiling in front of a blue doorway" }
     ]
   },
 

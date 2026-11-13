@@ -177,9 +177,9 @@ window.SITE = {
     intro: "For our guests traveling from out of town, we've included some helpful information to make planning your trip as easy as possible.",
     hereLabel: "Flying in",
     gettingHere: [
+      { icon: "plane", title: "Lehigh Valley International Airport (ABE)", text: "Approximately 15 minutes from Bethlehem by car." },
       { icon: "plane", title: "Philadelphia International Airport (PHL)", text: "Approximately 1 hour from Bethlehem by car." },
-      { icon: "plane", title: "Newark Liberty International Airport (EWR)", text: "Approximately 1.5 hours from Bethlehem by car." },
-      { icon: "plane", title: "Lehigh Valley International Airport (ABE)", text: "Approximately 15 minutes from Bethlehem by car." }
+      { icon: "plane", title: "Newark Liberty International Airport (EWR)", text: "Approximately 1.5 hours from Bethlehem by car." }
     ],
     hereNote: "We recommend renting a car or arranging transportation in advance.",
     aroundLabel: "Getting around",
